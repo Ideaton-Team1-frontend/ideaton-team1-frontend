@@ -109,7 +109,7 @@ function OnBoarding() {
                     우리 아이를 위한 안전한 공간
                     <br/>
                 </Text>
-                    <StyledStartButton onClick={() => navigate("/MainPage")}>
+                    <StyledStartButton onClick={() => navigate("/")}>
         
                         시작하기
         
