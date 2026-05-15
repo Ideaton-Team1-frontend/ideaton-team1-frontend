@@ -6,6 +6,7 @@ import MainPage from "./pages/MainPage"
 import ResultPage from "./pages/ResultPage"
 import Camera from "./pages/Camera";
 import KidData from "./pages/KidData";
+import ImageChoice from './pages/ImageChoice';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Route path="/MainPage" element ={<MainPage/>}/>
           <Route path="/ResultPage" element ={<ResultPage/>}/>
           <Route path="/camera" element ={<Camera/>}/>
+          <Route path="/imagechoice" element ={<ImageChoice/>}/>
          
           
 

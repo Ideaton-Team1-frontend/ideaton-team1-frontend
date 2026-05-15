@@ -4,12 +4,18 @@ import { useNavigate } from "react-router-dom";
 
 const Box = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-direction: column;
+  min-height: 100vh;
+  align-items: center; 
+  justify-content: center; 
+  flex-direction: column; 
+  margin: 0;
+  padding: 0;
   min-height: 100vh;
   width: 100vw;
   background-color: #FFF8F3;
+  
+  /* 혹시 모를 가로 스크롤 방지 */
+  overflow-x: hidden; 
 `;
 
 const AppContainer = styled.div`
@@ -76,6 +82,7 @@ const StyledStartButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 4px 10px rgba(255, 118, 142, 0.2); /* 은은한 그림자 */
+  z-index: 1;
 
   &:hover {
     background-color: #ff5c7d;
@@ -87,6 +94,20 @@ const StyledStartButton = styled.button`
     transform: translateY(0);
   }
 `;
+const Span = styled.span`
+  z-index: 1;
+  `
+
+const BottomNav = styled.nav`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  justify-content: space-between;
+  
+`;
+
   
 
 function OnBoarding() {
@@ -109,7 +130,8 @@ function OnBoarding() {
                     우리 아이를 위한 안전한 공간
                     <br/>
                 </Text>
-                    <StyledStartButton onClick={() => navigate("/")}>
+                
+                    <StyledStartButton onClick={() => navigate("/MainPage")}>
         
                         시작하기
         
@@ -118,6 +140,8 @@ function OnBoarding() {
                     <span>
                         다음에 할게요
                     </span>
+
+                    <BottomNav><img src='cloud1.png'/> <img src= 'cloud2.png' /> </BottomNav>
                 
             </AppContainer>
         </Box>
