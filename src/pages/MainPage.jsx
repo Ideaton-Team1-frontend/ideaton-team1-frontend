@@ -10,18 +10,16 @@ const Box = styled.div`
   flex-direction: column;
   min-height: 100vh; // height 대신 min-height 사용
   width: 100vw;
-  background-color: #f0f0f0; // 모바일 앱 밖의 배경색 (확인용)
+  background-color: #FFF8F3; // 모바일 앱 밖의 배경색 (확인용)
 `;
 
 // 모바일 앱 사이즈를 고정하는 컨테이너
 const AppContainer = styled.div`
   width: 100%;
-  max-width: 400px;
-  background-color: #fdfaf6; // 앱 기본 배경색
-  min-height: 100vh;
+  max-width: 480px;
+  background-color: #FFF8F3; // 앱 기본 배경색
   position: relative;
   padding-bottom: 80px; // 하단 네비게이션 바 공간
-  box-shadow: 0 0 10px rgba(0,0,0,0.05); // 양옆 그림자
 `;
 
 const Text = styled.div`
@@ -31,7 +29,7 @@ const Text = styled.div`
   word-break: keep-all; // 무조건 단어 단위로 줄바꿈
 `;
 
-// --- 추가된 Styled Components ---
+// 개별요소 스타일들
 
 const Header = styled.header`
   display: flex;
@@ -68,7 +66,7 @@ const BannerCard = styled.div`
 `;
 
 const BannerBtn = styled.button`
-  background: #ff8a8a;
+  background: #F27F8D;
   color: white;
   border: none;
   border-radius: 10px;
@@ -84,26 +82,37 @@ const HorizontalScroll = styled.div`
   overflow-x: auto;
   padding-bottom: 10px;
   
-  /* 스크롤바 숨기기 (선택사항) */
+  /* 스크롤바 숨기기 */
   &::-webkit-scrollbar { display: none; }
 `;
 
 const AnalysisCard = styled.div`
-  min-width: 200px;
+  min-width: 250px;
   height: 140px;
   background: white;
   border-radius: 15px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+ border:0.5px solid #EFE1DB;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
+const Compare_Bar = styled.div`
+  min-width: 250px;
+  height: 50px;
+  background: white;
+  border-radius: 15px;
+ border:2px solid #EFE1DB;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 const TipCard = styled.div`
   background: white;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+   border:0.5px solid #EFE1DB;
   min-height: 100px;
 `;
 
@@ -130,10 +139,10 @@ const NavItem = styled.div`
   cursor: pointer;
 `;
 
-const NavFab = styled.div`
+const Camera_Icon = styled.div`
   width: 60px;
   height: 60px;
-  background: #ff8a8a;
+  background: #F27F8D;
   border-radius: 50%;
   margin-top: -40px; // 하단바 위로 튀어나오게
   display: flex;
@@ -147,7 +156,7 @@ const NavFab = styled.div`
 
 // --- 메인 페이지 컴포넌트 ---
 
-function MainPage() {
+function MainPage({name}) {
   const navigate = useNavigate();
 
   return (
@@ -156,7 +165,7 @@ function MainPage() {
         {/* 상단 헤더 영역 */}
         <Header>
           <div>
-            <HeaderTitle>안녕하세요, <span>멋사님</span> 👋</HeaderTitle>
+            <HeaderTitle>안녕하세요, <span>멋사님{name}</span> 👋</HeaderTitle>
             <Text>오늘도 우리 아이가 안전하게 지낼 수 있도록<br/>세이프띠가 함께할게요.</Text>
           </div>
           <div>
@@ -202,7 +211,7 @@ function MainPage() {
         <BottomNav>
           <NavItem>🏠<br/>홈</NavItem>
           <NavItem>📋<br/>체크리스트</NavItem>
-          <NavFab onClick={() => alert("카메라 페이지로 이동!")}>📸</NavFab>
+          <Camera_Icon onClick={() => navigate("/Camera") }>📸</Camera_Icon>
           <NavItem>🛡️<br/>세이프티</NavItem>
           <NavItem>👤<br/>마이페이지</NavItem>
         </BottomNav>
