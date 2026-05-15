@@ -131,7 +131,7 @@ function OnBoarding() {
                     <br/>
                 </Text>
                 
-                    <StyledStartButton onClick={() => navigate("/MainPage")}>
+                    <StyledStartButton onClick={() => navigate("/kidData")}>
         
                         시작하기
         

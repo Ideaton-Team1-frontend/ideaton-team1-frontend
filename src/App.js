@@ -17,11 +17,11 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element ={<OnBoarding/>}/>
-          <Route path="/MainPage" element ={<MainPage/>}/>
-          <Route path="/ResultPage" element ={<ResultPage/>}/>
+          <Route path="/mainPage" element ={<MainPage/>}/>
+          <Route path="/resultPage" element ={<ResultPage/>}/>
           <Route path="/camera" element ={<Camera/>}/>
           <Route path="/imagechoice" element ={<ImageChoice/>}/>
-         
+         <Route path="/kidData" element ={<KidData/>}/>
           
 
         </Routes>

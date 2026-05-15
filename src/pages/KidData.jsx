@@ -85,45 +85,35 @@ export default function KidData() {
     const [name, setName] = useState("");
     const [height, setHeight] = useState("");
     const [date, setDate] = useState(null);
-    const Senddata = async () => {
-  const formattedDate = date.toISOString().split("T")[0];
 
-  const formData = new FormData();
+    const goPhotoPage = () => {
+  if (!date || !height || !gender) {
+    alert("정보를 모두 입력해주세요.");
+    return;
+  }
 
-  formData.append("birthDate", formattedDate);
-  formData.append("childHeight", height);
-  formData.append(
-    "childGender",
-    gender === "남자" ? "남아" : "여아"
+  const formattedDate =
+    date.toISOString().split("T")[0];
+
+  localStorage.setItem(
+    "userBirthDate",
+    formattedDate
   );
 
-  try {
-    const response = await axios.post(
-      "http://13.209.34.14:8080/api/analysis",
-      formData
-    );
+  localStorage.setItem(
+    "userHeight",
+    height
+  );
 
-    console.log(response.data);
+  localStorage.setItem(
+    "userGender",
+    gender === "남자"
+      ? "남아"
+      : "여아"
+  );
 
-    if (response.status === 200) {
-      localStorage.setItem("userBirthDate", formattedDate);
-      localStorage.setItem("userHeight", height);
-      localStorage.setItem(
-        "userGender",
-        gender === "남자" ? "남아" : "여아"
-      );
-
-      alert("아이 데이터가 성공적으로 전송되었습니다!");
-    }
-  } catch (error) {
-    console.log(error.response);
-    console.log(error.message);
-  }
+  navigate("/mainPage");
 };
-
-          
-    
-  
 
     return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
@@ -174,7 +164,7 @@ export default function KidData() {
                    onChange={(e) => setHeight(e.target.value)}
                 />
             </BirthBox>
-            <Btn name="확인" OnClick={Senddata}/>
+            <Btn name="확인" OnClick={goPhotoPage} />
 
          </div>
         
