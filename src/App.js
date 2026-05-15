@@ -4,6 +4,7 @@ import { GlobalStyles } from "./styles";
 import OnBoarding from "./pages/OnBoarding"
 import MainPage from "./pages/MainPage"
 import ResultPage from "./pages/ResultPage"
+import KidData from "./pages/KidData";
 
 
 function App() {
@@ -13,9 +14,9 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element ={<ResultPage/>}/>
-          <Route path="/MainPage" element ={<MainPage/>}/>
-          <Route path="/ResultPage" element ={<ResultPage/>}/>
+          <Route path="/" element ={<KidData/>}/>
+          <Route path="/mainPage" element ={<MainPage/>}/>
+          <Route path="/resultPage" element ={<ResultPage/>}/>
 
         </Routes>
       </BrowserRouter>

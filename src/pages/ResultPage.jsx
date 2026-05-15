@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import axios from "axios";
+import { useState } from "react";
 
 
 const Image = styled.img`
@@ -17,9 +18,13 @@ align-items: center;
 
 
 export default function ResultPage() {
+
+
+
     return (
         <Array>
             <Image src="/resultpt.png"  />
+            
         </Array>
     );
 
