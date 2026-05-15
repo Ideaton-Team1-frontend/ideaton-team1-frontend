@@ -5,6 +5,8 @@ import OnBoarding from "./pages/OnBoarding"
 import MainPage from "./pages/MainPage"
 import ResultPage from "./pages/ResultPage"
 import Camera from "./pages/Camera";
+import KidData from "./pages/KidData";
+
 
 function App() {
 
