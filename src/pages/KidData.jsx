@@ -7,6 +7,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import React from "react";
 
 
+// 화면 전체를 덮는 배경 컨테이너
+const BackGround = styled.div`
+  display: flex;
+  justify-content: flex-start; // 콘텐츠가 길어질 때 위쪽이 잘리지 않도록 수정
+  align-items: center;
+  flex-direction: column;
+  min-height: 90vh; // height 대신 min-height 사용
+  max-height: 90vh;
+  width: 100vw;
+  background-color: #FFF8F3; // 모바일 앱 밖의 배경색 (확인용)
+`;
 const Box = styled.div`
 border-radius: 12px;
 background-color: white;
@@ -79,6 +90,71 @@ const Btn = ({name , OnClick }) => {
     );
 };
 
+const Process_img = styled.div`
+  display: flex;
+ justify-content: center;
+ padding: 30px;
+`;
+
+const StepperContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  width: 85%;
+  max-width: 320px;
+  margin: 30px auto;
+`;
+
+const ProgressLine = styled.div`
+  position: absolute;
+  top: 10px; /* 동그라미 반지름 축에 맞춤 */
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #E0E0E0; /* 기본 비활성화 회색 선 */
+  z-index: 1;
+`;
+
+const ActiveProgressLine = styled.div`
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 100%; /* 현재 2단계가 활성화이므로 전체 선을 채움 (원하는 도달 범위만큼 조절 가능) */
+  height: 3px;
+  background: #f27f8d; /* 활성화 핑크 선 */
+  z-index: 1;
+`;
+
+const StepItem = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  width: 110px; /* 텍스트가 정렬을 깨트리지 않도록 고정 폭 확보 */
+`;
+
+const StepCircle = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: ${props => props.isActive ? '#f27f8d' : 'white'};
+  border: 2px solid ${props => props.isActive ? '#f27f8d' : '#E0E0E0'};
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 10px;
+`;
+
+const StepLabel = styled.span`
+  font-size: 0.8rem;
+  color: ${props => props.isActive ? '#4c3f3c' : '#999999'};
+  font-weight: ${props => props.isActive ? 'bold' : 'normal'};
+  white-space: nowrap;
+`;
+
+
+
+
 export default function KidData() {
     const navigate = useNavigate();
     const [gender, setGender] = useState("");
@@ -116,8 +192,11 @@ export default function KidData() {
 };
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100vh" }}>
-            
+
+        <BackGround>
+        <Process_img>
+        <img src="./scrollkids.png" />
+        </Process_img>
             <div> 아이의 <span style={{ color: "#f27f8d" }}>정보</span>를 입력해주세요. </div>
             <div> 정확한 분석을 위해 필요한 정보예요</div>
             <Box> 
@@ -166,7 +245,7 @@ export default function KidData() {
             </BirthBox>
             <Btn name="확인" OnClick={goPhotoPage} />
 
-         </div>
+         </BackGround>
         
     
     );

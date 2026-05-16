@@ -183,12 +183,12 @@ function ImageChoice() {
       // 선택한 이미지를 브라우저에서 바로 볼 수 있게 임시 URL 생성 (아이디어톤 꿀팁!)
       const imageUrl = URL.createObjectURL(file);
       
-      // Testpost 페이지로 이동하면서 파일 데이터와 이미지 URL을 같이 넘겨줌
+      // 목적 페이지로 이동하면서 파일 데이터와 이미지 URL을 같이 넘겨줌
       navigate("/testpost", { 
         state: { 
           imageFile: file, 
           previewUrl: imageUrl,
-          location: selectedLocation // 아까 선택한 장소도 같이 넘겨주면 좋겠죠?
+          location: selectedLocation // 아까 선택한 장소도 같이 넘겨주면 좋겠죠
         } 
       });
     }
