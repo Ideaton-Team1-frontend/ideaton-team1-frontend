@@ -61,7 +61,7 @@ const SectionHeader = styled.div`
 const BannerCard = styled.div`
   background: white;
   border-radius: 20px;
-  border: 2px solid #FFD9DE;
+  border: 2px solid #efe1db;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -93,7 +93,7 @@ const AnalysisCard = styled.div`
   height: 140px;
   background: white;
   border-radius: 15px;
-  border: 2px solid #FFD9DE;
+  border: 2px solid #efe1db;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -103,7 +103,7 @@ const Compare_Bar = styled.div`
   height: 50px;
   background: white;
   border-radius: 15px;
- border:2px solid #EFE1DB;
+ border:2px solid #efe1db;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -114,7 +114,7 @@ const TipCard = styled.div`
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-   border: 2px solid #FFD9DE;
+   border: 2px solid #efe1db;
   min-height: 100px;
 `;
 
