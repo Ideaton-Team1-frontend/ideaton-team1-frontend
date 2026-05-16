@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
@@ -46,7 +46,7 @@ const BackButton = styled.button`
   &:active {
     background-color: #fff5f5;
     border-color: #ff8a8a;
-  } /* 💡 누락되었던 닫는 중괄호 추가 */
+  } 
 `;
 
 // 메인 질문 카드 (핑크 테두리)
@@ -117,7 +117,10 @@ const AddButton = styled.button`
   &:active {
     background-color: #F27F8D;
     border-color: #ff8a8a;
-  } /* 💡 누락되었던 닫는 중괄호 추가 */
+  } 
+      &:hover {
+    border-color: #ff8a8a;
+  }
 `;
 
 // 하단 카메라/갤러리 선택 영역
@@ -152,6 +155,9 @@ const ActionCard = styled.button`
     background-color: #F27F8D;
     border-color: #ff8a8a;
   }
+      &:hover {
+    border-color: #ff8a8a;
+  }
 `;
 
 const ActionIcon = styled.div`
@@ -163,13 +169,30 @@ const ActionIcon = styled.div`
 
 function ImageChoice() {
   const navigate = useNavigate();
-  
-  // 💡 현재 선택된 장소를 저장하는 State (기본값: 거실)
   const [selectedLocation, setSelectedLocation] = useState('거실');
-  
-  // 💡 장소 목록 배열
   const locations = ['거실', '부엌', '화장실', '방', '베란다', '현관'];
 
+  // 💡 2. 숨겨진 파일 입력창을 조종할 리모컨(Ref) 생성
+  const fileInputRef = useRef(null);
+
+  // 💡 3. 파일이 선택되었을 때 실행될 함수
+  const handleFileChange = (e) => {
+    const file = e.target.files[0]; // 선택된 첫 번째 파일 가져오기
+    
+    if (file) {
+      // 선택한 이미지를 브라우저에서 바로 볼 수 있게 임시 URL 생성 (아이디어톤 꿀팁!)
+      const imageUrl = URL.createObjectURL(file);
+      
+      // Testpost 페이지로 이동하면서 파일 데이터와 이미지 URL을 같이 넘겨줌
+      navigate("/testpost", { 
+        state: { 
+          imageFile: file, 
+          previewUrl: imageUrl,
+          location: selectedLocation // 아까 선택한 장소도 같이 넘겨주면 좋겠죠?
+        } 
+      });
+    }
+  };
   return (
     <PageWrapper>
       <AppContainer>
@@ -197,6 +220,13 @@ function ImageChoice() {
 
           <AddButton>추가</AddButton>
         </QuestionCard>
+        <input 
+          type="file" 
+          accept="image/*" // 이미지만 선택 가능하게 필터링
+          style={{ display: 'none' }} // 화면에서 숨김
+          ref={fileInputRef} // 리모컨 연결
+          onChange={handleFileChange} // 파일 선택 시 함수 실행
+        />
 
         {/* 하단 버튼 2개 */}
         <BottomActionArea>
@@ -204,7 +234,7 @@ function ImageChoice() {
             <ActionIcon>📸</ActionIcon>
             <span>카메라로<br/>촬영하기</span>
           </ActionCard>
-          <ActionCard>
+          <ActionCard onClick={() => fileInputRef.current.click()}>
             <ActionIcon>🖼️</ActionIcon>
             <span>앨범에서<br/>가져오기</span>
           </ActionCard>
