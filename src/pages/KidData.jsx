@@ -45,7 +45,7 @@ const BirthBox = styled.div`
   box-shadow: 2px 5px 15px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
   margin-top: 20px;
-  padding: 0px 20px;
+  padding: 0px 20px 20px 20px;
 `;
 const StyledInput = styled.input` //입력창 스타일
   width: 100%;
@@ -73,7 +73,7 @@ const StyledDate = styled.div` //입력창 스타일
   height: 48px;
   border-radius: 12px;
   border: 1px solid #EBE4E2;
-  background-color: #FAFAFA;
+background-color: #white;
   padding: 0 16px;
   font-size: 0.95rem;
   color: #4c3f3c;
@@ -360,7 +360,7 @@ export default function KidData() {
                     < PinkCircle>2</PinkCircle> 아이의 <span style={{ color: "#f27f8d" }}>연령(월령)</span>을 선택해 주세요.
                 </MiddleHeaderTitle>
                 <Smalltext>생년 월일</Smalltext>
-                <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "8px" }}>
+                <ButtonRow style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "8px",alignItems:"center"}}>
                 <DatePicker
                   selected={date}
                   onChange={(date) => setDate(date)}
@@ -369,7 +369,7 @@ export default function KidData() {
                   customInput={<CustomInput />}
                 />
                 
-                </div>
+                </ButtonRow>
 
                 
             </BirthBox>

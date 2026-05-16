@@ -2,113 +2,128 @@ import { useState } from 'react';
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
+// 1. 전체 화면을 모바일 뷰포트에 딱 맞추고 스크롤을 막음
 const Box = styled.div`
   display: flex;
-  min-height: 100vh;
-  align-items: center; 
-  justify-content: center; 
-  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100dvh; /* dvh를 사용하여 모바일 주소창 이슈 해결 */
+  background-color: #FFF8F3;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
-  width: 100vw;
-  background-color: #FFF8F3;
-  
-  /* 혹시 모를 가로 스크롤 방지 */
-  overflow-x: hidden; 
+  overflow: hidden; 
 `;
 
+// 2. 내부 콘텐츠들이 위아래로 예쁘게 분배되도록 flex 구조 변경
 const AppContainer = styled.div`
-display: flex;
-  flex-direction: column;   /* 요소를 위에서 아래로 쌓음 */
-  justify-content: center;  /* 수직 중앙 정렬 */
-  align-items: center;      /* 수평 중앙 정렬 */
-  min-height: 100vh;        /* 화면 전체 높이 확보 */
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  justify-content: space-between; /* 상-중-하 균등 분배 */
   width: 100%;
-  background-color: #FFF8F3;
+  height: 100%;
+  max-width: 450px; /* 모바일 가로 제한 */
+  padding: 40px 20px 0px; /* 하단 구름이 바닥에 붙도록 하단 패딩은 0 */
+  box-sizing: border-box;
   text-align: center;
+  position: relative;
 `;
 
-// 로고 전용 스타일 컴포넌트 추가
+// 상단 영역 (로고 + 텍스트)을 묶어주는 그룹
+const TopContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto; /* 위아래 중앙 배치를 위한 트릭 */
+`;
+
 const LogoImage = styled.img`
-  margin-top: -70px;
-  width: auto;       /* 로고 크기 조절이 필요할 때 활용 */
+  width: 100%;
+  max-width: 440px; /* 로고가 지나치게 커지지 않도록 제한 */
   height: auto;
+  margin-top: 30px;
+`;
+
+const Header = styled.header`
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+`;
+
+const HeaderTitle = styled.h1`
+  font-size: 2.3rem;
+  margin: 0;
+  font-weight: bold;
+  color: #333;
+
+  span { color: #EF9898; }
+  span2 { 
+    font-size: 4.2rem; /* 4.5rem은 너무 커서 살짝 줄였습니다 */
+    font-weight: 900;
+  }
 `;
 
 const Text = styled.div`
-  font-size: 1.4rem;
-  line-height: 1.3;
-  margin-top: 10px; /* 로고와 텍스트 사이 간격 */
-  padding: 0 20px;  /* 양 옆 여백 */
+  font-size: 1.2rem;
+  line-height: 1.5;
+  margin-top: 15px;
+  color: #666;
   word-break: keep-all;
-  margin-bottom: 20px;
 `;
 
-
-const Header = styled.header`
-
-    margin-top: -20px;
-    display: flex;
-    width: 100vw;
-   justify-content: center;
-
-  padding: 30px 20px 20px;
-
+// 하단 영역 (버튼 + 링크 + 구름)을 묶어주는 그룹
+const BottomContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px; /* 하단으로 밀어내기 */
+  gap: 15px; /* 버튼과 '다음에 할게요' 사이 간격 */
+  z-index: 2;
 `;
 
-
-
-const HeaderTitle = styled.h1`
-
-  font-size: 2.5rem;
-
-  margin-bottom: 5px;
-
-  span { color: #ff6b6b; }
-  span2 { font-size: 4.5rem; }
-
-`;
 const StyledStartButton = styled.button`
-  background-color: #ff768e; /* 이미지의 부드러운 분홍색 */
+  background-color: #ff768e;
   color: white;
   border: none;
-  border-radius: 30px;      /* 완전히 둥근 모서리 */
-  width: 80%;               /* 화면 너비의 80% (모바일 권장) */
-  max-width: 350px;         /* 너무 커지지 않게 제한 */
-  height: 55px;             /* 터치하기 적당한 높이 */
+  border-radius: 30px;
+  width: 85%;
+  max-width: 350px;
+  height: 40px;
   font-size: 1.2rem;
   font-weight: bold;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 4px 10px rgba(255, 118, 142, 0.2); /* 은은한 그림자 */
-  z-index: 1;
+  box-shadow: 0 4px 10px rgba(255, 118, 142, 0.2);
 
   &:hover {
     background-color: #ff5c7d;
-    transform: translateY(-2px); /* 살짝 떠오르는 효과 */
-  }
-
-  &:active {
-    background-color: #ff4d6e;
-    transform: translateY(0);
   }
 `;
-const Span = styled.span`
-  z-index: 1;
-  `
 
+const NextLaterLink = styled.span`
+  font-size: 1rem;
+  color: #888;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-bottom: 20px; /* 구름과의 간격 */
+`;
+
+// 구름이 버튼 뒤쪽으로 자연스럽게 깔리도록 수정
 const BottomNav = styled.nav`
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 200px;
+  width: 100vw;
+  max-width: 450px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  pointer-events: none; /* 구름 클릭 안되게 막기 */
   
+  img {
+    width: 45%; /* 화면 크기에 맞춰 구름 크기 유동적 조절 */
+    height: auto;
+  }
 `;
-
-  
 
 function OnBoarding() {
     const navigate = useNavigate();
@@ -116,33 +131,37 @@ function OnBoarding() {
     return (
         <Box>
             <AppContainer>
-                {/* 인라인 스타일 대신 스타일 컴포넌트 사용 */}
-                <LogoImage src='../Logo.png' alt="Logo" />
-                <Header>
-                    <HeaderTitle>
-                    <span2>세이쁘띠</span2><br/>
-                    <span>SafePetit</span>
-                    </HeaderTitle>
+                {/* 상단 텍스트 영역 */}
+                <TopContent>
+                    <LogoImage src='../Logo.png' alt="Logo" />
+                    <Header>
+                        <HeaderTitle>
+                            <span2>세이쁘띠</span2><br/>
+                            <span>SafePetit</span>
+                        </HeaderTitle>
                     </Header>
-                <Text>
-                    영유아 홈 세이프티 가이드 
-                    <br />
-                    우리 아이를 위한 안전한 공간
-                    <br/>
-                </Text>
+                    <Text>
+                        영유아 홈 세이프티 가이드 
+                        <br />
+                        우리 아이를 위한 안전한 공간
+                    </Text>
+                </TopContent>
                 
+                {/* 하단 버튼 및 구름 영역 */}
+                <BottomContent>
                     <StyledStartButton onClick={() => navigate("/kidData")}>
-        
                         시작하기
-        
                     </StyledStartButton>
-                    <br/>
-                    <span>
+                    
+                    <NextLaterLink onClick={() => navigate("/home")}>
                         다음에 할게요
-                    </span>
+                    </NextLaterLink>
 
-                    <BottomNav><img src='cloud1.png'/> <img src= 'cloud2.png' /> </BottomNav>
-                
+                    <BottomNav>
+                        <img src='cloud1.png' alt="cloud" /> 
+                        <img src='cloud2.png' alt="cloud" /> 
+                    </BottomNav>
+                </BottomContent>
             </AppContainer>
         </Box>
     );
