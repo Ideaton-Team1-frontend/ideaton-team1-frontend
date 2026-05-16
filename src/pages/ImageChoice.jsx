@@ -1,6 +1,7 @@
 import React, { useState,useRef } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 // 전체 배경 (이전에 만든 Box 컴포넌트 활용)
 const PageWrapper = styled.div`
@@ -171,28 +172,64 @@ function ImageChoice() {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState('거실');
   const locations = ['거실', '부엌', '화장실', '방', '베란다', '현관'];
+  
+  localStorage.setItem("userLocation", Location);
+
+
 
   // 💡 2. 숨겨진 파일 입력창을 조종할 리모컨(Ref) 생성
   const fileInputRef = useRef(null);
 
   // 💡 3. 파일이 선택되었을 때 실행될 함수
-  const handleFileChange = (e) => {
+  const handleFileChange =  async(e) => {
     const file = e.target.files[0]; // 선택된 첫 번째 파일 가져오기
     
-    if (file) {
-      // 선택한 이미지를 브라우저에서 바로 볼 수 있게 임시 URL 생성 (아이디어톤 꿀팁!)
-      const imageUrl = URL.createObjectURL(file);
-      
-      // Testpost 페이지로 이동하면서 파일 데이터와 이미지 URL을 같이 넘겨줌
-      navigate("/testpost", { 
-        state: { 
-          imageFile: file, 
-          previewUrl: imageUrl,
-          location: selectedLocation // 아까 선택한 장소도 같이 넘겨주면 좋겠죠?
-        } 
-      });
+    if (!file) return; // 파일이 선택되지 않았으면 함수 종료
+
+    localStorage.setItem(
+    "userLocation",
+    selectedLocation
+  );
+
+    
+
+    const formData = new FormData();
+
+     formData.append(
+    "birthDate",
+    localStorage.getItem("userBirthDate")
+  );
+
+  formData.append(
+    "childHeight",
+    localStorage.getItem("userHeight")
+  );
+
+  formData.append(
+    "childGender",
+    localStorage.getItem("userGender")
+  );
+
+    formData.append("image", file); // 'image'라는 키로 파일 추가
+    
+    try {
+      const response = await axios.post("http://13.209.34.14:8080/api/analysis", formData);
+
+        if (response.status === 200) {
+        localStorage.setItem(
+        "analysisResult",
+        JSON.stringify(response.data)
+        
+        );
+        
+      navigate("/resultPage")
+    };
+    } catch (error) {
+      console.error("이미지 업로드 실패:", error);
     }
   };
+
+
   return (
     <PageWrapper>
       <AppContainer>
@@ -212,6 +249,7 @@ function ImageChoice() {
                 key={loc}
                 isActive={selectedLocation === loc}
                 onClick={() => setSelectedLocation(loc)}
+                
               >
                 {loc}
               </LocationButton>

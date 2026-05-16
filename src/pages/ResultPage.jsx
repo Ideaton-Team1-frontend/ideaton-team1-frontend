@@ -89,6 +89,7 @@ const CloseButton = styled.button`
 
 
 
+
 const ModalContent = ({setIsModalOpen ,  title, description, customAnalysis, solutions, recommendedItems  }) => {
     return (
         <Modal>
@@ -146,6 +147,19 @@ const ListItem = ({ imageSrc, title, description , customAnalysis, solutions, re
 export default function ResultPage() {
     const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템
 
+    const analysisResult =
+         JSON.parse(
+         localStorage.getItem(
+        "analysisResult"
+            )
+         );
+        
+        const location =
+           localStorage.getItem(
+           "userLocation"
+        );
+
+
 
 
     return (
@@ -154,13 +168,41 @@ export default function ResultPage() {
             <Box>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "8px" }}> 
                     < PinkCircle><Image src="alert.png" /></PinkCircle> 
-                    <div style={{ display: "flex", flexDirection: "column"}}>거실 분석 완료<span>아이에게 위험한 요소가 발견되었어요!</span></div>
+                    <div style={{ display: "flex", flexDirection: "column"}}>{location} 분석 완료<span>아이에게 위험한 요소가 발견되었어요!</span></div>
                 </div>
                 <div style={{ background: "#f27f8d", width : "90%", height: "1px" }}></div>
-                <div> 안전점수 <span style={{ color: "#f27f8d" }}>89</span>점</div>
+                <div> 안전점수 <span style={{ color: "#f27f8d" }}> {analysisResult?.safety_score} </span>점</div>
             </Box>
+
             
-            <ListItem  />
+           { analysisResult?.hazards?.map(
+                (item) => (
+                   <ListItem
+                        key={item.id}
+                        title={item.title}
+
+                        description={
+                        item.description
+                        }
+
+                        customAnalysis={
+                        item.custom_analysis
+                       }
+
+                        solutions={
+                        item.solutions
+                       }
+
+                       recommendedItems={
+                       item.recommended_items
+                      }
+                    
+                    
+                    />
+      
+                )
+                )
+            }
             
 
       
