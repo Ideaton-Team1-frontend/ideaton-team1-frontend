@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from "react-router-dom";
 
 // 전체 배경 (이전에 만든 Box 컴포넌트 활용)
 const PageWrapper = styled.div`
@@ -10,13 +11,14 @@ const PageWrapper = styled.div`
   min-height: 100vh;
   width: 100vw;
   background-color: #f8f9fa;
+
 `;
 
 // 모바일 고정 컨테이너
 const AppContainer = styled.div`
   width: 100%;
-  max-width: 400px;
-  min-height: 100vh;
+  max-width: 380px;
+  max-height: 70vh;
   background-color: #ffffff;
   padding: 40px 20px;
   display: flex;
@@ -33,18 +35,24 @@ const TopNav = styled.div`
 
 const BackButton = styled.button`
   background: white;
-  border: 1px solid #ddd;
+  border: 2px solid #FFD9DE;
+  width: 40%;
   border-radius: 8px;
   padding: 8px 15px;
   font-size: 0.9rem;
-  color: #666;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 107, 107, 0.05);
+  
+  &:active {
+    background-color: #fff5f5;
+    border-color: #ff8a8a;
+  } /* 💡 누락되었던 닫는 중괄호 추가 */
 `;
 
 // 메인 질문 카드 (핑크 테두리)
 const QuestionCard = styled.div`
-  background: #ffffff;
-  border: 1px solid #ffe3e3;
+  background: #FFF8F5;
+  border: 2px solid #FFD9DE;
   border-radius: 24px;
   padding: 40px 20px;
   display: flex;
@@ -74,58 +82,75 @@ const LocationGrid = styled.div`
   max-width: 280px;
 `;
 
+// 💡 선택 상태(isActive)에 따라 스타일이 동적으로 바뀌도록 수정
 const LocationButton = styled.button`
-  background: white;
-  border: 1px solid #eee;
+  background: ${props => props.isActive ? '#F27F8D' : 'white'};
+  color: ${props => props.isActive ? 'white' : '#444'};
+  border: 2px solid ${props => props.isActive ? '#F27F8D' : '#FFD9DE'};
   border-radius: 12px;
   padding: 15px;
   font-size: 1rem;
-  color: #444;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-  
-  &:active {
-    background-color: #fff5f5;
+  transition: all 0.15s ease-in-out;
+  outline: none;
+  font-family: inherit;
+
+  &:hover {
     border-color: #ff8a8a;
   }
 `;
 
 const AddButton = styled.button`
-  background: none;
-  border: none;
-  color: #ff8a8a;
+  width: 70%;
+  margin-top: 20px;
+  background: white;
+  border: 2px solid #FFD9DE;
+  border-radius: 12px;
+  padding: 15px;
   font-size: 0.9rem;
   text-decoration: underline;
-  margin-top: 20px;
+  color: #ff8a8a;
   cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  
+  &:active {
+    background-color: #F27F8D;
+    border-color: #ff8a8a;
+  } /* 💡 누락되었던 닫는 중괄호 추가 */
 `;
 
 // 하단 카메라/갤러리 선택 영역
 const BottomActionArea = styled.div`
   display: flex;
   gap: 15px;
-  width: 100%;
-  margin-top: 20px;
+  height: auto;
+  margin-top: 17px;
+  background: #FFF8F5;
+  border: 2px solid #FFD9DE;
+  border-radius: 24px;
+  padding: 20px 20px;
 `;
 
-const ActionCard = styled.div`
+const ActionCard = styled.button`
   flex: 1;
+  height: auto; /* 💡 auto% 오타 수정 */
   background: white;
   border-radius: 20px;
-  padding: 30px 15px;
+  padding: 15px 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  border: 1px solid #f0f0f0;
+  border: 2px solid #FFD9DE;
   box-shadow: 0 4px 10px rgba(0,0,0,0.04);
   cursor: pointer;
+  outline: none;
+  font-family: inherit;
 
-  span {
-    font-size: 0.9rem;
-    color: #555;
-    text-align: center;
-    line-height: 1.2;
+  &:active {
+    background-color: #F27F8D;
+    border-color: #ff8a8a;
   }
 `;
 
@@ -137,26 +162,37 @@ const ActionIcon = styled.div`
 // --- 컴포넌트 시작 ---
 
 function ImageChoice() {
+  const navigate = useNavigate();
+  
+  // 💡 현재 선택된 장소를 저장하는 State (기본값: 거실)
+  const [selectedLocation, setSelectedLocation] = useState('거실');
+  
+  // 💡 장소 목록 배열
+  const locations = ['거실', '부엌', '화장실', '방', '베란다', '현관'];
+
   return (
     <PageWrapper>
       <AppContainer>
         {/* 상단 네비게이션 */}
         <TopNav>
-          <BackButton>돌아가기</BackButton>
+          <BackButton onClick={() => navigate("/mainpage")}>돌아가기</BackButton>
         </TopNav>
 
         {/* 메인 선택 카드 */}
         <QuestionCard>
-          <IconWrapper>🏠</IconWrapper>
+          <IconWrapper><img src='./house_icon.png' alt="house icon" /></IconWrapper>
           <MainTitle>분석할 장소가 어디인가요?</MainTitle>
           
           <LocationGrid>
-            <LocationButton>거실</LocationButton>
-            <LocationButton>부엌</LocationButton>
-            <LocationButton>화장실</LocationButton>
-            <LocationButton>방</LocationButton>
-            <LocationButton>베란다</LocationButton>
-            <LocationButton>현관</LocationButton>
+            {locations.map((loc) => (
+              <LocationButton
+                key={loc}
+                isActive={selectedLocation === loc}
+                onClick={() => setSelectedLocation(loc)}
+              >
+                {loc}
+              </LocationButton>
+            ))}
           </LocationGrid>
 
           <AddButton>추가</AddButton>
@@ -164,7 +200,7 @@ function ImageChoice() {
 
         {/* 하단 버튼 2개 */}
         <BottomActionArea>
-          <ActionCard>
+          <ActionCard onClick={() => navigate("/camera")}>
             <ActionIcon>📸</ActionIcon>
             <span>카메라로<br/>촬영하기</span>
           </ActionCard>
