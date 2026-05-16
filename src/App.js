@@ -16,7 +16,7 @@ function App() {
       <GlobalStyles />
       <BrowserRouter>
         <Routes>
-          <Route path="/" element ={<ResultPage/>}/>
+          <Route path="/" element ={<OnBoarding/>}/>
           <Route path="/mainPage" element ={<MainPage/>}/>
           <Route path="/resultPage" element ={<ResultPage/>}/>
           <Route path="/camera" element ={<Camera/>}/>

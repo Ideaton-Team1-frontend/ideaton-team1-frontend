@@ -211,7 +211,7 @@ function MainPage({name}) {
         <BottomNav>
           <NavItem>🏠<br/>홈</NavItem>
           <NavItem>📋<br/>체크리스트</NavItem>
-          <Camera_Icon onClick={() => navigate("/Camera") }>📸</Camera_Icon>
+          <Camera_Icon onClick={() => navigate("/imagechoice") }>📸</Camera_Icon>
           <NavItem>🛡️<br/>세이프티</NavItem>
           <NavItem>👤<br/>마이페이지</NavItem>
         </BottomNav>
