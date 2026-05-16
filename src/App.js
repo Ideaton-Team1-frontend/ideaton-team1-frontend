@@ -7,7 +7,7 @@ import ResultPage from "./pages/ResultPage"
 import Camera from "./pages/Camera";
 import KidData from "./pages/KidData";
 import ImageChoice from './pages/ImageChoice';
-
+import Testpost from "./pages/Testpost";
 
 function App() {
 
@@ -22,6 +22,7 @@ function App() {
           <Route path="/camera" element ={<Camera/>}/>
           <Route path="/imagechoice" element ={<ImageChoice/>}/>
          <Route path="/kidData" element ={<KidData/>}/>
+         <Route path="/testpost" element ={<Testpost/>}/>
           
 
         </Routes>

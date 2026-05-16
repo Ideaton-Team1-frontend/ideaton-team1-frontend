@@ -8,7 +8,8 @@ const Box = styled.div`
   justify-content: flex-start; // 콘텐츠가 길어질 때 위쪽이 잘리지 않도록 수정
   align-items: center;
   flex-direction: column;
-  min-height: 100vh; // height 대신 min-height 사용
+  min-height: 90vh; // height 대신 min-height 사용
+  max-height: 90vh;
   width: 100vw;
   background-color: #FFF8F3; // 모바일 앱 밖의 배경색 (확인용)
 `;
@@ -60,6 +61,7 @@ const SectionHeader = styled.div`
 const BannerCard = styled.div`
   background: white;
   border-radius: 20px;
+  border: 2px solid #FFD9DE;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -91,7 +93,7 @@ const AnalysisCard = styled.div`
   height: 140px;
   background: white;
   border-radius: 15px;
- border:0.5px solid #EFE1DB;
+  border: 2px solid #FFD9DE;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -112,7 +114,7 @@ const TipCard = styled.div`
   border-radius: 15px;
   padding: 20px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-   border:0.5px solid #EFE1DB;
+   border: 2px solid #FFD9DE;
   min-height: 100px;
 `;
 
@@ -211,7 +213,7 @@ function MainPage({name}) {
         <BottomNav>
           <NavItem>🏠<br/>홈</NavItem>
           <NavItem>📋<br/>체크리스트</NavItem>
-          <Camera_Icon onClick={() => navigate("/imagechoice") }>📸</Camera_Icon>
+          <Camera_Icon onClick={() => navigate("/ImageChoice") }><img src='./camera_icon.png'/></Camera_Icon>
           <NavItem>🛡️<br/>세이프티</NavItem>
           <NavItem>👤<br/>마이페이지</NavItem>
         </BottomNav>
