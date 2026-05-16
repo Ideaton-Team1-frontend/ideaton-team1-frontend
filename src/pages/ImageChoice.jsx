@@ -8,7 +8,7 @@ const PageWrapper = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
   width: 100vw;
   background-color: #f8f9fa;
 
@@ -18,12 +18,13 @@ const PageWrapper = styled.div`
 const AppContainer = styled.div`
   width: 100%;
   max-width: 380px;
-  max-height: 70vh;
+  max-height: 100dvh;
   background-color: #ffffff;
   padding: 40px 20px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  box-sizing: border-box; /* 💡 패딩 때문에 전체 크기 안 깨지도록 필수 추가! */
 `;
 
 // 상단 돌아가기 버튼 영역
