@@ -72,7 +72,7 @@ const Text = styled.div`
   word-break: keep-all;
 `;
 
-// 하단 영역 (버튼 + 링크 + 구름)을 묶어주는 그룹
+// 하단 영역 (버튼 + 링크 + 구름)을 묶어주는 그룹 
 const BottomContent = styled.div`
   display: flex;
   flex-direction: column;
