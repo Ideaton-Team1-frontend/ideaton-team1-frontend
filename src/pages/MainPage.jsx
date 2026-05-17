@@ -2,35 +2,34 @@ import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-// 화면 전체를 덮는 배경 컨테이너
+
 const Box = styled.div`
   display: flex;
-  justify-content: flex-start; // 콘텐츠가 길어질 때 위쪽이 잘리지 않도록 수정
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  min-height: 90vh; // height 대신 min-height 사용
+  min-height: 90vh; 
   max-height: 90vh;
   width: 100vw;
-  background-color: #fff8f3; // 모바일 앱 밖의 배경색 (확인용)
+  background-color: #fff8f3; 
 `;
 
-// 모바일 앱 사이즈를 고정하는 컨테이너
 const AppContainer = styled.div`
   width: 100%;
   max-width: 480px;
-  background-color: #fff8f3; // 앱 기본 배경색
+  background-color: #fff8f3;
   position: relative;
-  padding-bottom: 80px; // 하단 네비게이션 바 공간
+  padding-bottom: 80px; 
 `;
 
 const Text = styled.div`
-  font-size: 1rem; // html 비례 폰트 조정
-  line-height: 1.3; // 줄간격
+  font-size: 1rem; 
+  line-height: 1.3; 
   margin-bottom: 10px;
-  word-break: keep-all; // 무조건 단어 단위로 줄바꿈
+  word-break: keep-all; 
 `;
 
-// 개별요소 스타일들
+
 
 const Header = styled.header`
   display: flex;
@@ -156,7 +155,7 @@ const Camera_Icon = styled.div`
   height: 60px;
   background: #f27f8d;
   border-radius: 50%;
-  margin-top: -40px; // 하단바 위로 튀어나오게
+  margin-top: -40px; 
   display: flex;
   justify-content: center;
   align-items: center;
@@ -166,7 +165,7 @@ const Camera_Icon = styled.div`
   cursor: pointer;
 `;
 
-// --- 메인 페이지 컴포넌트 ---
+
 
 function MainPage({ name }) {
   const navigate = useNavigate();
