@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // 화면 전체를 덮는 배경 컨테이너
 const Box = styled.div`
@@ -196,7 +196,7 @@ function MainPage({ name }) {
           <BannerCard>
             <h3>📋 체크리스트에 아직 해결되지 않은 위험 요소가 있어요!</h3>
             <Text
-              style={{ fontSize: '0.8rem', color: '#666', marginTop: '10px' }}
+              style={{ fontSize: "0.8rem", color: "#666", marginTop: "10px" }}
             >
               지금 확인하고 우리 아이 환경을 더 안전하게 관리해요
             </Text>
@@ -242,7 +242,7 @@ function MainPage({ name }) {
             <br />
             체크리스트
           </NavItem>
-          <Camera_Icon onClick={() => navigate('/ImageChoice')}>
+          <Camera_Icon onClick={() => navigate("/ImageChoice")}>
             <img src="./camera_icon.png" />
           </Camera_Icon>
           <NavItem>

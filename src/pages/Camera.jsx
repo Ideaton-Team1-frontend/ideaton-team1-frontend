@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from "react";
 
 const Camera = () => {
   const videoRef = useRef(null);
@@ -10,15 +10,15 @@ const Camera = () => {
     const startCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'environment' },
+          video: { facingMode: "environment" },
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
           setIsCameraOn(true);
         }
       } catch (error) {
-        console.error('카메라 접근 실패:', error);
-        alert('카메라 접근 권한이 필요합니다.');
+        console.error("카메라 접근 실패:", error);
+        alert("카메라 접근 권한이 필요합니다.");
       }
     };
 
@@ -34,15 +34,15 @@ const Camera = () => {
 
   const capturePhoto = () => {
     if (canvasRef.current && videoRef.current && isCameraOn) {
-      const context = canvasRef.current.getContext('2d');
+      const context = canvasRef.current.getContext("2d");
       canvasRef.current.width = videoRef.current.videoWidth;
       canvasRef.current.height = videoRef.current.videoHeight;
 
       context.drawImage(videoRef.current, 0, 0);
-      const photoData = canvasRef.current.toDataURL('image/jpeg');
+      const photoData = canvasRef.current.toDataURL("image/jpeg");
 
       setPhotos([...photos, photoData]);
-      alert('촬영되었습니다!');
+      alert("촬영되었습니다!");
     }
   };
 
@@ -51,7 +51,7 @@ const Camera = () => {
   };
 
   const downloadPhoto = (photoData, index) => {
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = photoData;
     link.download = `photo_${index + 1}.jpg`;
     link.click();
@@ -69,7 +69,7 @@ const Camera = () => {
           muted
           className="video-stream"
         />
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
+        <canvas ref={canvasRef} style={{ display: "none" }} />
       </div>
 
       <div className="controls">

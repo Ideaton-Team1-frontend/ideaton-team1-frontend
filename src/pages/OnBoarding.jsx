@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 // 1. 전체 화면을 모바일 뷰포트에 딱 맞추고 스크롤을 막음
 const Box = styled.div`
@@ -152,11 +152,11 @@ function OnBoarding() {
 
         {/* 하단 버튼 및 구름 영역 */}
         <BottomContent>
-          <StyledStartButton onClick={() => navigate('/kidData')}>
+          <StyledStartButton onClick={() => navigate("/kidData")}>
             시작하기
           </StyledStartButton>
 
-          <NextLaterLink onClick={() => navigate('/home')}>
+          <NextLaterLink onClick={() => navigate("/home")}>
             다음에 할게요
           </NextLaterLink>
 

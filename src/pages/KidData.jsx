@@ -1,10 +1,10 @@
-import styled from 'styled-components';
-import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import React from 'react';
+import styled from "styled-components";
+import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import React from "react";
 
 // 화면 전체를 덮는 배경 컨테이너
 const BackGround = styled.div`
@@ -114,20 +114,20 @@ const GenderButton = ({ gend, gender, setGender }) => {
       style={{
         // 💡 가로 공간을 반씩 이쁘게 나눠 갖도록 flex 설정
         flex: 1,
-        height: '33px',
-        borderRadius: '12px',
-        fontSize: '1rem',
-        fontWeight: 'bold',
-        cursor: 'pointer',
-        transition: 'all 0.2s ease',
-        boxSizing: 'border-box',
-        outline: 'none',
-        marginBottom: '20px',
+        height: "33px",
+        borderRadius: "12px",
+        fontSize: "1rem",
+        fontWeight: "bold",
+        cursor: "pointer",
+        transition: "all 0.2s ease",
+        boxSizing: "border-box",
+        outline: "none",
+        marginBottom: "20px",
 
         // 💡 피그마 시안 컬러 매칭 (선택 여부에 따른 스타일 분기)
-        border: isActive ? '1px solid #f27f8d' : '1px solid #EBE4E2',
-        backgroundColor: isActive ? '#f27f8d' : '#ffffff',
-        color: isActive ? '#ffffff' : '#4c3f3c',
+        border: isActive ? "1px solid #f27f8d" : "1px solid #EBE4E2",
+        backgroundColor: isActive ? "#f27f8d" : "#ffffff",
+        color: isActive ? "#ffffff" : "#4c3f3c",
       }}
     >
       {gend}
@@ -138,19 +138,19 @@ const GenderButton = ({ gend, gender, setGender }) => {
 const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
   <div
     style={{
-      display: 'flex',
-      alignItems: 'stretch',
-      border: '1px solid #ccc',
-      borderRadius: '8px',
+      display: "flex",
+      alignItems: "stretch",
+      border: "1px solid #ccc",
+      borderRadius: "8px",
     }}
   >
     <span>{value || new Date().toLocaleDateString()}</span>
     <div
-      style={{ alignSelf: 'stretch', width: '1px', backgroundColor: '#4c3f3c' }}
+      style={{ alignSelf: "stretch", width: "1px", backgroundColor: "#4c3f3c" }}
     >
-      {' '}
+      {" "}
     </div>
-    <span onClick={onClick} style={{ marginLeft: 'auto', cursor: 'pointer' }}>
+    <span onClick={onClick} style={{ marginLeft: "auto", cursor: "pointer" }}>
       📅
     </span>
   </div>
@@ -212,16 +212,16 @@ const StepCircle = styled.div`
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background-color: ${(props) => (props.isActive ? '#f27f8d' : 'white')};
-  border: 2px solid ${(props) => (props.isActive ? '#f27f8d' : '#E0E0E0')};
+  background-color: ${(props) => (props.isActive ? "#f27f8d" : "white")};
+  border: 2px solid ${(props) => (props.isActive ? "#f27f8d" : "#E0E0E0")};
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   margin-bottom: 10px;
 `;
 
 const StepLabel = styled.span`
   font-size: 0.8rem;
-  color: ${(props) => (props.isActive ? '#4c3f3c' : '#999999')};
-  font-weight: ${(props) => (props.isActive ? 'bold' : 'normal')};
+  color: ${(props) => (props.isActive ? "#4c3f3c" : "#999999")};
+  font-weight: ${(props) => (props.isActive ? "bold" : "normal")};
   white-space: nowrap;
 `;
 
@@ -291,26 +291,26 @@ const Smalltext = styled.div`
 
 export default function KidData() {
   const navigate = useNavigate();
-  const [gender, setGender] = useState('');
-  const [name, setName] = useState('');
-  const [height, setHeight] = useState('');
+  const [gender, setGender] = useState("");
+  const [name, setName] = useState("");
+  const [height, setHeight] = useState("");
   const [date, setDate] = useState(null);
 
   const goPhotoPage = () => {
     if (!date || !height || !gender) {
-      alert('정보를 모두 입력해주세요.');
+      alert("정보를 모두 입력해주세요.");
       return;
     }
 
-    const formattedDate = date.toISOString().split('T')[0];
+    const formattedDate = date.toISOString().split("T")[0];
 
-    localStorage.setItem('userBirthDate', formattedDate);
+    localStorage.setItem("userBirthDate", formattedDate);
 
-    localStorage.setItem('userHeight', height);
+    localStorage.setItem("userHeight", height);
 
-    localStorage.setItem('userGender', gender === '남자' ? '남아' : '여아');
+    localStorage.setItem("userGender", gender === "남자" ? "남아" : "여아");
 
-    navigate('/mainPage');
+    navigate("/mainPage");
   };
 
   return (
@@ -333,17 +333,17 @@ export default function KidData() {
       {/* 여기까지 최상단 진행도 바 */}
 
       <HeaderTitle>
-        {' '}
-        아이의 <span>정보</span>를 입력해주세요.{' '}
+        {" "}
+        아이의 <span>정보</span>를 입력해주세요.{" "}
       </HeaderTitle>
       <Text> 정확한 분석을 위해 필요한 정보예요</Text>
       <Box>
         <MiddleHeaderTitle
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '8px',
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "8px",
           }}
         >
           <PinkCircle>1</PinkCircle> 아이의<span>기본 정보</span>를 입력해
@@ -357,8 +357,8 @@ export default function KidData() {
           onChange={(e) => setName(e.target.value)}
         />
         <div>
-          {' '}
-          아이의 <span style={{ color: '#f27f8d' }}>성별</span>을 선택해 주세요.
+          {" "}
+          아이의 <span style={{ color: "#f27f8d" }}>성별</span>을 선택해 주세요.
         </div>
         <ButtonRow>
           <GenderButton gend="남자" gender={gender} setGender={setGender} />
@@ -368,23 +368,23 @@ export default function KidData() {
       <BirthBox>
         <MiddleHeaderTitle
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '8px',
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "8px",
           }}
         >
-          <PinkCircle>2</PinkCircle> 아이의{' '}
-          <span style={{ color: '#f27f8d' }}>연령(월령)</span>을 선택해 주세요.
+          <PinkCircle>2</PinkCircle> 아이의{" "}
+          <span style={{ color: "#f27f8d" }}>연령(월령)</span>을 선택해 주세요.
         </MiddleHeaderTitle>
         <Smalltext>생년 월일</Smalltext>
         <ButtonRow
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '8px',
-            alignItems: 'center',
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "8px",
+            alignItems: "center",
           }}
         >
           <DatePicker
@@ -400,14 +400,14 @@ export default function KidData() {
       <BirthBox>
         <MiddleHeaderTitle
           style={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: '8px',
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            gap: "8px",
           }}
         >
-          <PinkCircle>3</PinkCircle> 아이의{' '}
-          <span style={{ color: '#f27f8d' }}>키</span>를 입력해 주세요.
+          <PinkCircle>3</PinkCircle> 아이의{" "}
+          <span style={{ color: "#f27f8d" }}>키</span>를 입력해 주세요.
         </MiddleHeaderTitle>
         <StyledInput
           type="text"
@@ -416,7 +416,7 @@ export default function KidData() {
         />
       </BirthBox>
       <ButtonRow_2>
-        <StyledConfirmButton onClick={() => navigate('/mainpage')}>
+        <StyledConfirmButton onClick={() => navigate("/mainpage")}>
           확인
         </StyledConfirmButton>
       </ButtonRow_2>

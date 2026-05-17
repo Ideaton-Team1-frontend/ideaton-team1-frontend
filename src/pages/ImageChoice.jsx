@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useRef } from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // 전체 배경 (이전에 만든 Box 컴포넌트 활용)
 const PageWrapper = styled.div`
@@ -85,9 +85,9 @@ const LocationGrid = styled.div`
 
 // 💡 선택 상태(isActive)에 따라 스타일이 동적으로 바뀌도록 수정
 const LocationButton = styled.button`
-  background: ${(props) => (props.isActive ? '#F27F8D' : 'white')};
-  color: ${(props) => (props.isActive ? 'white' : '#444')};
-  border: 2px solid ${(props) => (props.isActive ? '#F27F8D' : '#FFD9DE')};
+  background: ${(props) => (props.isActive ? "#F27F8D" : "white")};
+  color: ${(props) => (props.isActive ? "white" : "#444")};
+  border: 2px solid ${(props) => (props.isActive ? "#F27F8D" : "#FFD9DE")};
   border-radius: 12px;
   padding: 15px;
   font-size: 1rem;
@@ -170,10 +170,10 @@ const ActionIcon = styled.div`
 
 function ImageChoice() {
   const navigate = useNavigate();
-  const [selectedLocation, setSelectedLocation] = useState('거실');
-  const locations = ['거실', '부엌', '화장실', '방', '베란다', '현관'];
+  const [selectedLocation, setSelectedLocation] = useState("거실");
+  const locations = ["거실", "부엌", "화장실", "방", "베란다", "현관"];
 
-  localStorage.setItem('userLocation', Location);
+  localStorage.setItem("userLocation", Location);
 
   // 💡 2. 숨겨진 파일 입력창을 조종할 리모컨(Ref) 생성
   const fileInputRef = useRef(null);
@@ -186,30 +186,30 @@ function ImageChoice() {
 
     if (!file) return; // 파일이 선택되지 않았으면 함수 종료
 
-    localStorage.setItem('userLocation', selectedLocation);
+    localStorage.setItem("userLocation", selectedLocation);
 
     const formData = new FormData();
 
-    formData.append('birthDate', localStorage.getItem('userBirthDate'));
+    formData.append("birthDate", localStorage.getItem("userBirthDate"));
 
-    formData.append('childHeight', localStorage.getItem('userHeight'));
+    formData.append("childHeight", localStorage.getItem("userHeight"));
 
-    formData.append('childGender', localStorage.getItem('userGender'));
+    formData.append("childGender", localStorage.getItem("userGender"));
 
-    formData.append('image', file); // 'image'라는 키로 파일 추가
+    formData.append("image", file); // 'image'라는 키로 파일 추가
 
     try {
       const response = await axios.post(
-        'http://13.209.34.14:8080/api/analysis',
+        "http://13.209.34.14:8080/api/analysis",
         formData
       );
 
       if (response.status === 200) {
-        localStorage.setItem('analysisResult', JSON.stringify(response.data));
-        navigate('/resultPage', { state: { imageUrl } });
+        localStorage.setItem("analysisResult", JSON.stringify(response.data));
+        navigate("/resultPage", { state: { imageUrl } });
       }
     } catch (error) {
-      console.error('이미지 업로드 실패:', error);
+      console.error("이미지 업로드 실패:", error);
     }
   };
 
@@ -218,7 +218,7 @@ function ImageChoice() {
       <AppContainer>
         {/* 상단 네비게이션 */}
         <TopNav>
-          <BackButton onClick={() => navigate('/mainpage')}>
+          <BackButton onClick={() => navigate("/mainpage")}>
             돌아가기
           </BackButton>
         </TopNav>
@@ -247,14 +247,14 @@ function ImageChoice() {
         <input
           type="file"
           accept="image/*" // 이미지만 선택 가능하게 필터링
-          style={{ display: 'none' }} // 화면에서 숨김
+          style={{ display: "none" }} // 화면에서 숨김
           ref={fileInputRef} // 리모컨 연결
           onChange={handleFileChange} // 파일 선택 시 함수 실행
         />
 
         {/* 하단 버튼 2개 */}
         <BottomActionArea>
-          <ActionCard onClick={() => navigate('/camera')}>
+          <ActionCard onClick={() => navigate("/camera")}>
             <ActionIcon>📸</ActionIcon>
             <span>
               카메라로

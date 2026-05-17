@@ -1,6 +1,6 @@
-import React from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 const PreviewImage = styled.img`
   width: 100%;
@@ -17,8 +17,8 @@ function Testpost() {
   const { previewUrl, location: roomName } = location.state || {};
 
   return (
-    <div style={{ padding: '20px', textAlign: 'center' }}>
-      <h2>선택된 장소: {roomName || '없음'}</h2>
+    <div style={{ padding: "20px", textAlign: "center" }}>
+      <h2>선택된 장소: {roomName || "없음"}</h2>
 
       {/* 이미지가 있으면 띄워주기 */}
       {previewUrl ? (
