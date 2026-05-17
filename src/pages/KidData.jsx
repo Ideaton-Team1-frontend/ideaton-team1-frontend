@@ -111,7 +111,7 @@ const GenderButton = ({ gend, gender, setGender }) => {
         <button
             onClick={() => setGender(gend)}
             style={{
-                // 💡 가로 공간을 반씩 이쁘게 나눠 갖도록 flex 설정
+                //  가로 공간을 반씩 나눠 갖도록 flex 설정
                 flex: 1, 
                 height: "33px",
                 borderRadius: "12px",
@@ -123,7 +123,6 @@ const GenderButton = ({ gend, gender, setGender }) => {
                 outline: "none",
                 marginBottom: "20px",
 
-                // 💡 피그마 시안 컬러 매칭 (선택 여부에 따른 스타일 분기)
                 border: isActive ? "1px solid #f27f8d" : "1px solid #EBE4E2",
                 backgroundColor: isActive ? "#f27f8d" : "#ffffff", 
                 color: isActive ? "#ffffff" : "#4c3f3c"
@@ -133,22 +132,49 @@ const GenderButton = ({ gend, gender, setGender }) => {
         </button>
     );
 };
-
+const DatePickerContainer = styled.div`
+  width: 100%;
+  
+  .react-datepicker-wrapper {
+    width: 100%; /* 라이브러리 내부 wrapper 폭을 100%로 강제 확장 */
+  }
+`;
+// 💡 내부 글자 중앙 정렬 버전 CustomInput
 const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
-    <div style={{ 
-        display: "flex", 
-        alignItems: "stretch",
-         border: "1px solid #ccc",
-          borderRadius: "8px",
-           
-           
-         }}>
-        <span>{value || new Date().toLocaleDateString()}</span> 
-        <div style={{ alignSelf: "stretch", width: "1px", backgroundColor: "#4c3f3c"  }}> </div>
-        <span onClick={onClick} style={{ marginLeft: "auto", cursor: "pointer" }}>📅</span>
+    <div 
+        onClick={onClick}
+        ref={ref}
+        style={{ 
+            display: "flex", 
+            alignItems: "center",
+            justifyContent: "center", // 💡 글자를 정중앙에 배치
+            border: "2px solid #EFE1DB",
+            borderRadius: "12px", 
+            height: "48px", 
+            padding: "0 16px",
+            width: "100%", 
+            boxSizing: "border-box",
+            cursor: "pointer",
+            position: "relative" // 💡 우측 아이콘 고정을 위해 relative 추가
+        }}>
+        
+        {/* 날짜 텍스트 (부모가 중앙 정렬이라 딱 가운데에 옴) */}
+        <span style={{ color: value ? "#4c3f3c" : "#C0B7B5", fontSize: "0.95rem" }}>
+            {value || "날짜 선택"}
+        </span> 
+        
+        {/*  달력 아이콘 구역을 우측에 절대 위치로 고정 (텍스트 정렬에 영향을 주지 않음) */}
+        <div style={{ 
+            position: "absolute", 
+            right: "16px", 
+            display: "flex", 
+            alignItems: "center" 
+        }}>
+            <div style={{ width: "2px", height: "40px",backgroundColor: "#EFE1DB", marginRight: "12px" }}> </div>
+            <span>📅</span>
+        </div>
     </div>
 ));
-
 const Btn = ({name , OnClick }) => {
     return (
         <button onClick={OnClick}>
@@ -176,8 +202,8 @@ const StepperContainer = styled.div`
 const ProgressLine = styled.div`
   position: absolute;
   top: 10px; /* 동그라미 반지름 축에 맞춤 */
-  left: 55px; /* 💡 첫 번째 아이템 너비(110px)의 절반인 55px부터 시작 */
-  width: calc(100% - 110px); /* 💡 양쪽 끝 여백(55px * 2)을 제외한 만큼만 선 길이 설정 */
+  left: 55px; /*  첫 번째 아이템 너비(110px)의 절반인 55px부터 시작 */
+  width: calc(100% - 110px); /* 양쪽 끝 여백(55px * 2)을 제외한 만큼만 선 길이 설정 */
   height: 3px;
   background: #E0E0E0; /* 기본 비활성화 회색 선 */
   z-index: 1;
@@ -186,8 +212,8 @@ const ProgressLine = styled.div`
 const ActiveProgressLine = styled.div`
   position: absolute;
   top: 10px;
-  left: 55px; /* 💡 회색 선과 똑같이 55px 지점부터 시작 */
-  width: calc(100% - 110px); /* 💡 현재 2단계가 활성화이므로 두 번째 동그라미 중심까지 꽉 채움 */
+  left: 55px; /*  회색 선과 똑같이 55px 지점부터 시작 */
+  width: calc(100% - 110px); /*  현재 2단계가 활성화이므로 두 번째 동그라미 중심까지 꽉 채움 */
   height: 3px;
   background: #f27f8d; /* 활성화 핑크 선 */
   z-index: 1;
@@ -360,7 +386,7 @@ export default function KidData() {
                     < PinkCircle>2</PinkCircle> 아이의 <span style={{ color: "#f27f8d" }}>연령(월령)</span>을 선택해 주세요.
                 </MiddleHeaderTitle>
                 <Smalltext>생년 월일</Smalltext>
-                <ButtonRow style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "8px",alignItems:"center"}}>
+                <DatePickerContainer><ButtonRow style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "8px",alignItems:"center"}}>
                 <DatePicker
                   selected={date}
                   onChange={(date) => setDate(date)}
@@ -370,6 +396,7 @@ export default function KidData() {
                 />
                 
                 </ButtonRow>
+                </DatePickerContainer>
 
                 
             </BirthBox>
