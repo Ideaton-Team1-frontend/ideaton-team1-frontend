@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -107,16 +107,7 @@ const AnalysisCard = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Compare_Bar = styled.div`
-  min-width: 250px;
-  height: 50px;
-  background: white;
-  border-radius: 15px;
-  border: 2px solid #efe1db;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+
 
 const TipCard = styled.div`
   background: white;
@@ -150,7 +141,7 @@ const NavItem = styled.div`
   cursor: pointer;
 `;
 
-const Camera_Icon = styled.div`
+const CameraIcon = styled.div`
   width: 60px;
   height: 60px;
   background: #f27f8d;
@@ -241,9 +232,9 @@ function MainPage({ name }) {
             <br />
             체크리스트
           </NavItem>
-          <Camera_Icon onClick={() => navigate("/ImageChoice")}>
-            <img src="./camera_icon.png" />
-          </Camera_Icon>
+          <CameraIcon onClick={() => navigate("/ImageChoice")}>
+            <img src="./camera_icon.png" alt="" />
+          </CameraIcon>
           <NavItem>
             🛡️
             <br />

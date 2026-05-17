@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -192,7 +191,7 @@ const ModalContent = ({
       </CloseButton>
 
       <span style={{ display: "flex", marginBottom: "10px" }}>
-        <MImage src="speakerpt.png" />
+        <MImage src="speakerpt.png" alt="" />
 
         <div
           style={{
@@ -279,7 +278,7 @@ const ListItem = ({
       {isDone === null ? (
         // 아직 선택 안 했을 때
         <>
-          <MImage src="speakerpt.png" />
+          <MImage src="speakerpt.png" alt="" />
 
           <div
             style={{
@@ -322,7 +321,7 @@ const ListItem = ({
           }}
         >
           <MinickBox>
-            <img src="Checkcircle.png "></img>
+            <img src="Checkcircle.png" alt=""/>
           </MinickBox>{" "}
           해결 완료했어요!
         </p>

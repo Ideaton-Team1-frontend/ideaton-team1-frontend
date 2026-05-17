@@ -1,4 +1,4 @@
-import styled from "styled-components";
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { GlobalStyles } from "./styles";
 import OnBoarding from "./pages/OnBoarding";
