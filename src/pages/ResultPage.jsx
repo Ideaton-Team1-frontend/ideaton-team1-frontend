@@ -20,16 +20,12 @@ const MinickBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  
-
 `;
 
 const Bold = styled.h4`
-font-size: 14px;
-margin-bottom : 5px;
-
+  font-size: 14px;
+  margin-bottom: 5px;
 `;
-
 
 const MImage = styled.img`
   width: 55px;
@@ -73,11 +69,7 @@ const ListBox = styled.button`
   padding-top: 8px;
   padding-bottom: 8px;
   background-color: ${({ isDone }) =>
-    isDone === true
-      ? '#6ecf78'
-      : isDone === false
-      ? '#fad88f'
-      : 'white'};
+    isDone === true ? "#6ecf78" : isDone === false ? "#fad88f" : "white"};
 `;
 
 const CheckMark = styled.div`
@@ -105,7 +97,7 @@ const Modal = styled.div`
   background-color: white;
   border-radius: 12px;
   padding: 17px;
-  
+
   box-sizing: border-box;
   top: 0;
   left: 0%;
@@ -172,13 +164,12 @@ const SolvedBtn = styled.button`
   outline: none;
   font-size: 16px;
   background-color: white;
-  box-shadow: 2px 5px 10px  #efe1db;
-  color:  #f27f8d;
+  box-shadow: 2px 5px 10px #efe1db;
+  color: #f27f8d;
   font-size: 10px;
-  
-`; 
+`;
 
-  //---- 컴포넌트------
+//---- 컴포넌트------
 
 const ModalContent = ({
   setIsModalOpen,
@@ -200,39 +191,30 @@ const ModalContent = ({
         ×
       </CloseButton>
 
-      <span style={{ display: "flex", marginBottom: "10px"}}>
-
-      <MImage src="speakerpt.png" />
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              textAlign: "left",
-              paddingLeft: "10px",
-            }}
-          >
-            <span style={{ fontWeight: "bold", fontSize: "13px" }}>
-              {title}
-            </span>
-            <span style={{ fontSize: "10px" }}>{description}</span>
-          </div>
-
-        </span>
-
-
-
-
-  
+      <span style={{ display: "flex", marginBottom: "10px" }}>
+        <MImage src="speakerpt.png" />
 
         <div
           style={{
-            marginLeft: "2%",
-            background: "#d9d9d9",
-            width: "95%",
-            height: "1px",
+            display: "flex",
+            flexDirection: "column",
+            textAlign: "left",
+            paddingLeft: "10px",
           }}
-        ></div>
+        >
+          <span style={{ fontWeight: "bold", fontSize: "13px" }}>{title}</span>
+          <span style={{ fontSize: "10px" }}>{description}</span>
+        </div>
+      </span>
+
+      <div
+        style={{
+          marginLeft: "2%",
+          background: "#d9d9d9",
+          width: "95%",
+          height: "1px",
+        }}
+      ></div>
 
       <Bold>우리 아이 맞춤분석</Bold>
       <p>{customAnalysis}</p>
@@ -247,27 +229,32 @@ const ModalContent = ({
         <p key={i}>💗{item}</p>
       ))}
 
-      <div style={{display:" flex", justifyContent: "space-around", marginTop : "40px"}}>
-
-      <SolvedBtn
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsDone(true);
-          setIsModalOpen(false);
+      <div
+        style={{
+          display: " flex",
+          justifyContent: "space-around",
+          marginTop: "40px",
         }}
       >
-        해결 완료했어요!
-      </SolvedBtn>
-      <NoBtn
-        onClick={(e) => {
-          e.stopPropagation();
-          setIsDone(false);
-          setIsModalOpen(false);
-        }}
-      >
-        아직 해결하지 못했어요.
-      </NoBtn>
-    </div>
+        <SolvedBtn
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsDone(true);
+            setIsModalOpen(false);
+          }}
+        >
+          해결 완료했어요!
+        </SolvedBtn>
+        <NoBtn
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsDone(false);
+            setIsModalOpen(false);
+          }}
+        >
+          아직 해결하지 못했어요.
+        </NoBtn>
+      </div>
     </Modal>
   );
 };
@@ -323,30 +310,40 @@ const ListItem = ({
         </>
       ) : isDone === true ? (
         // 해결 완료했을 때
-        <p style={{ 
-           margin: "0px",
-    display: "flex",
-    alignItems: "center",
-    color: "white",
-    fontSize: "14px",
-    width: "100%",
-    gap: "8px",
-   
-          
-        }}><MinickBox><img src="Checkcircle.png "></img></MinickBox> 해결 완료했어요!</p>
+        <p
+          style={{
+            margin: "0px",
+            display: "flex",
+            alignItems: "center",
+            color: "white",
+            fontSize: "14px",
+            width: "100%",
+            gap: "8px",
+          }}
+        >
+          <MinickBox>
+            <img src="Checkcircle.png "></img>
+          </MinickBox>{" "}
+          해결 완료했어요!
+        </p>
       ) : (
         // 아직 해결 못 했을 때
-        <p style={{
-          margin: "0px",
-    display: "flex",
-    alignItems: "center",
-    color: "#95986f",
-    fontSize: "14px",
-    width: "100%",
-    gap: "8px",
-          
-         
-        }}><MinickBox><img src="Checkcircle1.png "/></MinickBox>체크리스트로 이동</p>
+        <p
+          style={{
+            margin: "0px",
+            display: "flex",
+            alignItems: "center",
+            color: "#95986f",
+            fontSize: "14px",
+            width: "100%",
+            gap: "8px",
+          }}
+        >
+          <MinickBox>
+            <img src="Checkcircle1.png " />
+          </MinickBox>
+          체크리스트로 이동
+        </p>
       )}
 
       {isModalOpen && (
@@ -368,9 +365,9 @@ export default function ResultPage() {
   const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템
   const navigate = useNavigate();
 
-  const analysisResult = JSON.parse(localStorage.getItem("analysisResult" ));
-        
-    /* 테스트용 데이터
+  const analysisResult = JSON.parse(localStorage.getItem("analysisResult"));
+
+  /* 테스트용 데이터
     {
     safety_score: 68,
     hazard_count: 4,
@@ -431,10 +428,6 @@ export default function ResultPage() {
 
   */
 
-
-  
-        
-
   const userLocation = localStorage.getItem("userLocation");
 
   const location = useLocation();
@@ -443,7 +436,7 @@ export default function ResultPage() {
   return (
     <Array>
       {/* 테스트용 데이터 <Image src="resultpt.png"  /> */}
-      <Image src= {imageUrl}/>
+      <Image src={imageUrl} />
       <Box>
         <div
           style={{

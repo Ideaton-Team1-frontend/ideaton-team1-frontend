@@ -311,8 +311,6 @@ export default function KidData() {
     localStorage.setItem("userGender", gender === "남자" ? "남아" : "여아");
 
     navigate("/mainPage");
-
-    
   };
 
   return (

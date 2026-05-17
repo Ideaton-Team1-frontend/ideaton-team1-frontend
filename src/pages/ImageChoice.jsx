@@ -209,7 +209,18 @@ function ImageChoice() {
         navigate("/resultPage", { state: { imageUrl } });
       }
     } catch (error) {
-      console.error("이미지 업로드 실패:", error);
+        console.log("에러 전체:", error);
+
+  if (error.response) {
+    console.log("응답 데이터:", error.response.data);
+    console.log("응답 상태:", error.response.status);
+  } else if (error.request) {
+    console.log("요청은 갔는데 응답 없음");
+    console.log(error.request);
+  } else {
+    console.log("axios 설정 문제");
+    console.log(error.message);
+  }
     }
   };
 
