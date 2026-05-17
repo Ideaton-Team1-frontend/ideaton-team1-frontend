@@ -278,7 +278,7 @@ const ListItem = ({
       {isDone === null ? (
         // 아직 선택 안 했을 때
         <>
-          <MImage src="speakerpt.png" alt = "" />
+          <MImage src="speakerpt.png" alt="" />
 
           <div
             style={{
