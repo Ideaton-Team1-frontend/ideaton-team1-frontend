@@ -368,7 +368,10 @@ export default function ResultPage() {
   const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템
   const navigate = useNavigate();
 
-  const analysisResult = {
+  const analysisResult = JSON.parse(localStorage.getItem("analysisResult" ));
+        
+    /* 테스트용 데이터
+    {
     safety_score: 68,
     hazard_count: 4,
     hazards: [
@@ -424,15 +427,13 @@ export default function ResultPage() {
       },
     ],
   };
-  /*
-         JSON.parse(
-         localStorage.getItem(
-        "analysisResult"
-            )
 
-            
-         );
-        */
+
+  */
+
+
+  
+        
 
   const userLocation = localStorage.getItem("userLocation");
 
@@ -441,8 +442,8 @@ export default function ResultPage() {
 
   return (
     <Array>
-      {/* <Image src={imageUrl}  /> */}
-      <Image src="resultpt.png" />
+      {/* 테스트용 데이터 <Image src="resultpt.png"  /> */}
+      <Image src= {imageUrl}/>
       <Box>
         <div
           style={{
