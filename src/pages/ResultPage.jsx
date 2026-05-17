@@ -361,7 +361,6 @@ const ListItem = ({
 };
 
 export default function ResultPage() {
-  const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템
   const navigate = useNavigate();
 
   const analysisResult = JSON.parse(localStorage.getItem("analysisResult"));

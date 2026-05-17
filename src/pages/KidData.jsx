@@ -156,11 +156,7 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
 ));
 
 
-const Process_img = styled.div`
-  display: flex;
- justify-content: center;
- padding: 30px;
-`;
+
 
 const StepperContainer = styled.div`
   display: flex;
