@@ -73,7 +73,7 @@ const StyledDate = styled.div`
   height: 48px;
   border-radius: 12px;
   border: 1px solid #ebe4e2;
-  background-color: #white;
+  background-color: white;
   padding: 0 16px;
   font-size: 0.95rem;
   color: #4c3f3c;
@@ -311,6 +311,8 @@ export default function KidData() {
     localStorage.setItem("userGender", gender === "남자" ? "남아" : "여아");
 
     navigate("/mainPage");
+
+    
   };
 
   return (
@@ -416,7 +418,7 @@ export default function KidData() {
         />
       </BirthBox>
       <ButtonRow_2>
-        <StyledConfirmButton onClick={() => navigate("/mainpage")}>
+        <StyledConfirmButton onClick={() => goPhotoPage()}>
           확인
         </StyledConfirmButton>
       </ButtonRow_2>
