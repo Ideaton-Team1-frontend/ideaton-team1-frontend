@@ -73,7 +73,7 @@ const StyledDate = styled.div` //입력창 스타일
   height: 48px;
   border-radius: 12px;
   border: 1px solid #EBE4E2;
-background-color: #white;
+background-color: white;
   padding: 0 16px;
   font-size: 0.95rem;
   color: #4c3f3c;
@@ -339,7 +339,7 @@ export default function KidData() {
       : "여아"
   );
 
-  navigate("/mainPage");
+  navigate("/mainpage");
 };
 
     return (
@@ -411,7 +411,7 @@ export default function KidData() {
                    onChange={(e) => setHeight(e.target.value)}
                 />
             </BirthBox>
-           <ButtonRow_2><StyledConfirmButton  onClick={() => navigate("/mainpage") }>확인</StyledConfirmButton></ButtonRow_2>
+           <ButtonRow_2><StyledConfirmButton  onClick={() => goPhotoPage()}>확인</StyledConfirmButton></ButtonRow_2>
 
          </BackGround>
         

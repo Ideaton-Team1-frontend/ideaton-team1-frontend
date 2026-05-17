@@ -1,6 +1,7 @@
-import React, { useState,useRef } from 'react';
-import styled from 'styled-components';
+import React, { useState, useRef } from "react";
+import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 // 전체 배경 (이전에 만든 Box 컴포넌트 활용)
 const PageWrapper = styled.div`
@@ -11,7 +12,6 @@ const PageWrapper = styled.div`
   min-height: 100dvh;
   width: 100vw;
   background-color: #f8f9fa;
-
 `;
 
 // 모바일 고정 컨테이너
@@ -36,24 +36,24 @@ const TopNav = styled.div`
 
 const BackButton = styled.button`
   background: white;
-  border: 2px solid #FFD9DE;
+  border: 2px solid #ffd9de;
   width: 40%;
   border-radius: 8px;
   padding: 8px 15px;
   font-size: 0.9rem;
   cursor: pointer;
   box-shadow: 0 4px 15px rgba(255, 107, 107, 0.05);
-  
+
   &:active {
     background-color: #fff5f5;
     border-color: #ff8a8a;
-  } 
+  }
 `;
 
 // 메인 질문 카드 (핑크 테두리)
 const QuestionCard = styled.div`
-  background: #FFF8F5;
-  border: 2px solid #FFD9DE;
+  background: #fff8f5;
+  border: 2px solid #ffd9de;
   border-radius: 24px;
   padding: 40px 20px;
   display: flex;
@@ -85,14 +85,14 @@ const LocationGrid = styled.div`
 
 // 💡 선택 상태(isActive)에 따라 스타일이 동적으로 바뀌도록 수정
 const LocationButton = styled.button`
-  background: ${props => props.isActive ? '#F27F8D' : 'white'};
-  color: ${props => props.isActive ? 'white' : '#444'};
-  border: 2px solid ${props => props.isActive ? '#F27F8D' : '#FFD9DE'};
+  background: ${(props) => (props.isActive ? "#F27F8D" : "white")};
+  color: ${(props) => (props.isActive ? "white" : "#444")};
+  border: 2px solid ${(props) => (props.isActive ? "#F27F8D" : "#FFD9DE")};
   border-radius: 12px;
   padding: 15px;
   font-size: 1rem;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
   transition: all 0.15s ease-in-out;
   outline: none;
   font-family: inherit;
@@ -106,20 +106,20 @@ const AddButton = styled.button`
   width: 70%;
   margin-top: 20px;
   background: white;
-  border: 2px solid #FFD9DE;
+  border: 2px solid #ffd9de;
   border-radius: 12px;
   padding: 15px;
   font-size: 0.9rem;
   text-decoration: underline;
   color: #ff8a8a;
   cursor: pointer;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-  
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+
   &:active {
-    background-color: #F27F8D;
+    background-color: #f27f8d;
     border-color: #ff8a8a;
-  } 
-      &:hover {
+  }
+  &:hover {
     border-color: #ff8a8a;
   }
 `;
@@ -130,8 +130,8 @@ const BottomActionArea = styled.div`
   gap: 15px;
   height: auto;
   margin-top: 17px;
-  background: #FFF8F5;
-  border: 2px solid #FFD9DE;
+  background: #fff8f5;
+  border: 2px solid #ffd9de;
   border-radius: 24px;
   padding: 20px 20px;
 `;
@@ -146,17 +146,17 @@ const ActionCard = styled.button`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  border: 2px solid #FFD9DE;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+  border: 2px solid #ffd9de;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
   cursor: pointer;
   outline: none;
   font-family: inherit;
 
   &:active {
-    background-color: #F27F8D;
+    background-color: #f27f8d;
     border-color: #ff8a8a;
   }
-      &:hover {
+  &:hover {
     border-color: #ff8a8a;
   }
 `;
@@ -170,43 +170,77 @@ const ActionIcon = styled.div`
 
 function ImageChoice() {
   const navigate = useNavigate();
-  const [selectedLocation, setSelectedLocation] = useState('거실');
-  const locations = ['거실', '부엌', '화장실', '방', '베란다', '현관'];
+  const [selectedLocation, setSelectedLocation] = useState("거실");
+  const locations = ["거실", "부엌", "화장실", "방", "베란다", "현관"];
+
+  localStorage.setItem("userLocation", Location);
 
   // 💡 2. 숨겨진 파일 입력창을 조종할 리모컨(Ref) 생성
   const fileInputRef = useRef(null);
 
   // 💡 3. 파일이 선택되었을 때 실행될 함수
-  const handleFileChange = (e) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files[0]; // 선택된 첫 번째 파일 가져오기
-    
-    if (file) {
-      // 선택한 이미지를 브라우저에서 바로 볼 수 있게 임시 URL 생성 (아이디어톤 꿀팁!)
-      const imageUrl = URL.createObjectURL(file);
-      
-      // 목적 페이지로 이동하면서 파일 데이터와 이미지 URL을 같이 넘겨줌
-      navigate("/testpost", { 
-        state: { 
-          imageFile: file, 
-          previewUrl: imageUrl,
-          location: selectedLocation // 아까 선택한 장소도 같이 넘겨주면 좋겠죠
-        } 
-      });
+
+    const imageUrl = URL.createObjectURL(file);
+
+    if (!file) return; // 파일이 선택되지 않았으면 함수 종료
+
+    localStorage.setItem("userLocation", selectedLocation);
+
+    const formData = new FormData();
+
+    formData.append("birthDate", localStorage.getItem("userBirthDate"));
+
+    formData.append("childHeight", localStorage.getItem("userHeight"));
+
+    formData.append("childGender", localStorage.getItem("userGender"));
+
+    formData.append("image", file); // 'image'라는 키로 파일 추가
+
+    try {
+      const response = await axios.post(
+        "http://13.209.34.14:8080/api/analysis",
+        formData
+      );
+
+      if (response.status === 200) {
+        localStorage.setItem("analysisResult", JSON.stringify(response.data));
+        navigate("/resultPage", { state: { imageUrl } });
+      }
+    } catch (error) {
+        console.log("에러 전체:", error);
+
+  if (error.response) {
+    console.log("응답 데이터:", error.response.data);
+    console.log("응답 상태:", error.response.status);
+  } else if (error.request) {
+    console.log("요청은 갔는데 응답 없음");
+    console.log(error.request);
+  } else {
+    console.log("axios 설정 문제");
+    console.log(error.message);
+  }
     }
   };
+
   return (
     <PageWrapper>
       <AppContainer>
         {/* 상단 네비게이션 */}
         <TopNav>
-          <BackButton onClick={() => navigate("/mainpage")}>돌아가기</BackButton>
+          <BackButton onClick={() => navigate("/mainpage")}>
+            돌아가기
+          </BackButton>
         </TopNav>
 
         {/* 메인 선택 카드 */}
         <QuestionCard>
-          <IconWrapper><img src='./house_icon.png' alt="house icon" /></IconWrapper>
+          <IconWrapper>
+            <img src="./house_icon.png" alt="house icon" />
+          </IconWrapper>
           <MainTitle>분석할 장소가 어디인가요?</MainTitle>
-          
+
           <LocationGrid>
             {locations.map((loc) => (
               <LocationButton
@@ -221,10 +255,10 @@ function ImageChoice() {
 
           <AddButton>추가</AddButton>
         </QuestionCard>
-        <input 
-          type="file" 
+        <input
+          type="file"
           accept="image/*" // 이미지만 선택 가능하게 필터링
-          style={{ display: 'none' }} // 화면에서 숨김
+          style={{ display: "none" }} // 화면에서 숨김
           ref={fileInputRef} // 리모컨 연결
           onChange={handleFileChange} // 파일 선택 시 함수 실행
         />
@@ -233,14 +267,21 @@ function ImageChoice() {
         <BottomActionArea>
           <ActionCard onClick={() => navigate("/camera")}>
             <ActionIcon>📸</ActionIcon>
-            <span>카메라로<br/>촬영하기</span>
+            <span>
+              카메라로
+              <br />
+              촬영하기
+            </span>
           </ActionCard>
           <ActionCard onClick={() => fileInputRef.current.click()}>
             <ActionIcon>🖼️</ActionIcon>
-            <span>앨범에서<br/>가져오기</span>
+            <span>
+              앨범에서
+              <br />
+              가져오기
+            </span>
           </ActionCard>
         </BottomActionArea>
-
       </AppContainer>
     </PageWrapper>
   );

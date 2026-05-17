@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -9,16 +9,16 @@ const Box = styled.div`
   align-items: center;
   width: 100vw;
   height: 100dvh; /* dvh를 사용하여 모바일 주소창 이슈 해결 */
-  background-color: #FFF8F3;
+  background-color: #fff8f3;
   margin: 0;
   padding: 0;
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 // 2. 내부 콘텐츠들이 위아래로 예쁘게 분배되도록 flex 구조 변경
 const AppContainer = styled.div`
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: space-between; /* 상-중-하 균등 분배 */
   width: 100%;
@@ -57,8 +57,10 @@ const HeaderTitle = styled.h1`
   font-weight: bold;
   color: #333;
 
-  span { color: #EF9898; }
-  span2 { 
+  span {
+    color: #ef9898;
+  }
+  span2 {
     font-size: 4.2rem; /* 4.5rem은 너무 커서 살짝 줄였습니다 */
     font-weight: 900;
   }
@@ -72,7 +74,7 @@ const Text = styled.div`
   word-break: keep-all;
 `;
 
-// 하단 영역 (버튼 + 링크 + 구름)을 묶어주는 그룹 
+// 하단 영역 (버튼 + 링크 + 구름)을 묶어주는 그룹
 const BottomContent = styled.div`
   display: flex;
   flex-direction: column;
@@ -118,7 +120,7 @@ const BottomNav = styled.nav`
   justify-content: space-between;
   align-items: flex-end;
   pointer-events: none; /* 구름 클릭 안되게 막기 */
-  
+
   img {
     width: 45%; /* 화면 크기에 맞춰 구름 크기 유동적 조절 */
     height: auto;
@@ -126,45 +128,46 @@ const BottomNav = styled.nav`
 `;
 
 function OnBoarding() {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    return (
-        <Box>
-            <AppContainer>
-                {/* 상단 텍스트 영역 */}
-                <TopContent>
-                    <LogoImage src='../Logo.png' alt="Logo" />
-                    <Header>
-                        <HeaderTitle>
-                            <span2>세이쁘띠</span2><br/>
-                            <span>SafePetit</span>
-                        </HeaderTitle>
-                    </Header>
-                    <Text>
-                        영유아 홈 세이프티 가이드 
-                        <br />
-                        우리 아이를 위한 안전한 공간
-                    </Text>
-                </TopContent>
-                
-                {/* 하단 버튼 및 구름 영역 */}
-                <BottomContent>
-                    <StyledStartButton onClick={() => navigate("/kidData")}>
-                        시작하기
-                    </StyledStartButton>
-                    
-                    <NextLaterLink onClick={() => navigate("/home")}>
-                        다음에 할게요
-                    </NextLaterLink>
+  return (
+    <Box>
+      <AppContainer>
+        {/* 상단 텍스트 영역 */}
+        <TopContent>
+          <LogoImage src="../Logo.png" alt="Logo" />
+          <Header>
+            <HeaderTitle>
+              <span2>세이쁘띠</span2>
+              <br />
+              <span>SafePetit</span>
+            </HeaderTitle>
+          </Header>
+          <Text>
+            영유아 홈 세이프티 가이드
+            <br />
+            우리 아이를 위한 안전한 공간
+          </Text>
+        </TopContent>
 
-                    <BottomNav>
-                        <img src='cloud1.png' alt="cloud" /> 
-                        <img src='cloud2.png' alt="cloud" /> 
-                    </BottomNav>
-                </BottomContent>
-            </AppContainer>
-        </Box>
-    );
+        {/* 하단 버튼 및 구름 영역 */}
+        <BottomContent>
+          <StyledStartButton onClick={() => navigate("/kidData")}>
+            시작하기
+          </StyledStartButton>
+
+          <NextLaterLink onClick={() => navigate("/home")}>
+            다음에 할게요
+          </NextLaterLink>
+
+          <BottomNav>
+            <img src="cloud1.png" alt="cloud" />
+            <img src="cloud2.png" alt="cloud" />
+          </BottomNav>
+        </BottomContent>
+      </AppContainer>
+    </Box>
+  );
 }
 
 export default OnBoarding;
