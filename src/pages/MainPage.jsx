@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 // 화면 전체를 덮는 배경 컨테이너
 const Box = styled.div`
@@ -11,14 +11,14 @@ const Box = styled.div`
   min-height: 90vh; // height 대신 min-height 사용
   max-height: 90vh;
   width: 100vw;
-  background-color: #FFF8F3; // 모바일 앱 밖의 배경색 (확인용)
+  background-color: #fff8f3; // 모바일 앱 밖의 배경색 (확인용)
 `;
 
 // 모바일 앱 사이즈를 고정하는 컨테이너
 const AppContainer = styled.div`
   width: 100%;
   max-width: 480px;
-  background-color: #FFF8F3; // 앱 기본 배경색
+  background-color: #fff8f3; // 앱 기본 배경색
   position: relative;
   padding-bottom: 80px; // 하단 네비게이션 바 공간
 `;
@@ -41,7 +41,9 @@ const Header = styled.header`
 const HeaderTitle = styled.h1`
   font-size: 1.2rem;
   margin-bottom: 5px;
-  span { color: #ff6b6b; }
+  span {
+    color: #ff6b6b;
+  }
 `;
 
 const Section = styled.section`
@@ -53,9 +55,15 @@ const SectionHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  
-  h2 { font-size: 1.1rem; }
-  span { font-size: 0.8rem; color: #888; cursor: pointer; }
+
+  h2 {
+    font-size: 1.1rem;
+  }
+  span {
+    font-size: 0.8rem;
+    color: #888;
+    cursor: pointer;
+  }
 `;
 
 const BannerCard = styled.div`
@@ -64,11 +72,11 @@ const BannerCard = styled.div`
   border: 2px solid #efe1db;
   padding: 20px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
 `;
 
 const BannerBtn = styled.button`
-  background: #F27F8D;
+  background: #f27f8d;
   color: white;
   border: none;
   border-radius: 10px;
@@ -83,9 +91,11 @@ const HorizontalScroll = styled.div`
   gap: 15px;
   overflow-x: auto;
   padding-bottom: 10px;
-  
+
   /* 스크롤바 숨기기 */
-  &::-webkit-scrollbar { display: none; }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const AnalysisCard = styled.div`
@@ -103,18 +113,18 @@ const Compare_Bar = styled.div`
   height: 50px;
   background: white;
   border-radius: 15px;
- border:2px solid #efe1db;
+  border: 2px solid #efe1db;
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const TipCard = styled.div`
   background: white;
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-   border: 2px solid #efe1db;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  border: 2px solid #efe1db;
   min-height: 100px;
 `;
 
@@ -144,7 +154,7 @@ const NavItem = styled.div`
 const Camera_Icon = styled.div`
   width: 60px;
   height: 60px;
-  background: #F27F8D;
+  background: #f27f8d;
   border-radius: 50%;
   margin-top: -40px; // 하단바 위로 튀어나오게
   display: flex;
@@ -158,7 +168,7 @@ const Camera_Icon = styled.div`
 
 // --- 메인 페이지 컴포넌트 ---
 
-function MainPage({name}) {
+function MainPage({ name }) {
   const navigate = useNavigate();
 
   return (
@@ -167,8 +177,14 @@ function MainPage({name}) {
         {/* 상단 헤더 영역 */}
         <Header>
           <div>
-            <HeaderTitle>안녕하세요, <span>멋사님{name}</span> 👋</HeaderTitle>
-            <Text>오늘도 우리 아이가 안전하게 지낼 수 있도록<br/>세이프띠가 함께할게요.</Text>
+            <HeaderTitle>
+              안녕하세요, <span>멋사님{name}</span> 👋
+            </HeaderTitle>
+            <Text>
+              오늘도 우리 아이가 안전하게 지낼 수 있도록
+              <br />
+              세이프띠가 함께할게요.
+            </Text>
           </div>
           <div>
             <span>🔔</span> <span>👤</span>
@@ -179,7 +195,9 @@ function MainPage({name}) {
         <Section>
           <BannerCard>
             <h3>📋 체크리스트에 아직 해결되지 않은 위험 요소가 있어요!</h3>
-            <Text style={{fontSize: '0.8rem', color: '#666', marginTop: '10px'}}>
+            <Text
+              style={{ fontSize: '0.8rem', color: '#666', marginTop: '10px' }}
+            >
               지금 확인하고 우리 아이 환경을 더 안전하게 관리해요
             </Text>
             <BannerBtn>체크리스트로 이동해서 다시 점검하기 &gt;</BannerBtn>
@@ -205,19 +223,39 @@ function MainPage({name}) {
             <span>더보기</span>
           </SectionHeader>
           <TipCard>
-            <Text>아이의 성장 속도만큼<br/>위험 요소도 빠르게 달라져요.</Text>
+            <Text>
+              아이의 성장 속도만큼
+              <br />
+              위험 요소도 빠르게 달라져요.
+            </Text>
           </TipCard>
         </Section>
 
         {/* 하단 네비게이션 바 */}
         <BottomNav>
-          <NavItem>🏠<br/>홈</NavItem>
-          <NavItem>📋<br/>체크리스트</NavItem>
-          <Camera_Icon onClick={() => navigate("/ImageChoice") }><img src='./camera_icon.png'/></Camera_Icon>
-          <NavItem>🛡️<br/>세이프티</NavItem>
-          <NavItem>👤<br/>마이페이지</NavItem>
+          <NavItem>
+            🏠
+            <br />홈
+          </NavItem>
+          <NavItem>
+            📋
+            <br />
+            체크리스트
+          </NavItem>
+          <Camera_Icon onClick={() => navigate('/ImageChoice')}>
+            <img src="./camera_icon.png" />
+          </Camera_Icon>
+          <NavItem>
+            🛡️
+            <br />
+            세이프티
+          </NavItem>
+          <NavItem>
+            👤
+            <br />
+            마이페이지
+          </NavItem>
         </BottomNav>
-        
       </AppContainer>
     </Box>
   );

@@ -1,6 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
 
-
 const Camera = () => {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
@@ -11,7 +10,7 @@ const Camera = () => {
     const startCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: 'environment' }
+          video: { facingMode: 'environment' },
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -27,7 +26,7 @@ const Camera = () => {
 
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
-        videoRef.current.srcObject.getTracks().forEach(track => track.stop());
+        videoRef.current.srcObject.getTracks().forEach((track) => track.stop());
         setIsCameraOn(false);
       }
     };
@@ -38,10 +37,10 @@ const Camera = () => {
       const context = canvasRef.current.getContext('2d');
       canvasRef.current.width = videoRef.current.videoWidth;
       canvasRef.current.height = videoRef.current.videoHeight;
-      
+
       context.drawImage(videoRef.current, 0, 0);
       const photoData = canvasRef.current.toDataURL('image/jpeg');
-      
+
       setPhotos([...photos, photoData]);
       alert('촬영되었습니다!');
     }
@@ -61,12 +60,12 @@ const Camera = () => {
   return (
     <div className="camera-container">
       <h1>카메라 촬영</h1>
-      
+
       <div className="video-container">
-        <video 
-          ref={videoRef} 
-          autoPlay 
-          playsInline 
+        <video
+          ref={videoRef}
+          autoPlay
+          playsInline
           muted
           className="video-stream"
         />
@@ -74,8 +73,8 @@ const Camera = () => {
       </div>
 
       <div className="controls">
-        <button 
-          onClick={capturePhoto} 
+        <button
+          onClick={capturePhoto}
           disabled={!isCameraOn}
           className="btn-capture"
         >
@@ -90,13 +89,13 @@ const Camera = () => {
             <div key={index} className="photo-card">
               <img src={photo} alt={`촬영 ${index + 1}`} />
               <div className="photo-actions">
-                <button 
+                <button
                   onClick={() => downloadPhoto(photo, index)}
                   className="btn-download"
                 >
                   ⬇️
                 </button>
-                <button 
+                <button
                   onClick={() => deletePhoto(index)}
                   className="btn-delete"
                 >
