@@ -339,7 +339,7 @@ const ListItem = ({
           }}
         >
           <MinickBox>
-            <img src="Checkcircle1.png " />
+            <img src="Checkcircle1.png " alt="" />
           </MinickBox>
           체크리스트로 이동
         </p>
@@ -446,7 +446,7 @@ export default function ResultPage() {
           }}
         >
           <PinkCircle>
-            <img src="alert.png" />
+            <img src="alert.png" alt="" />
           </PinkCircle>
           <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
             <span style={{ fontWeight: "bold", fontSize: "15px" }}>
