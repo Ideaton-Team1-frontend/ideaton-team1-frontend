@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-// 전체 배경 (이전에 만든 Box 컴포넌트 활용)
+
 const PageWrapper = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -14,7 +14,6 @@ const PageWrapper = styled.div`
   background-color: #f8f9fa;
 `;
 
-// 모바일 고정 컨테이너
 const AppContainer = styled.div`
   width: 100%;
   max-width: 380px;
@@ -24,10 +23,10 @@ const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  box-sizing: border-box; /* 💡 패딩 때문에 전체 크기 안 깨지도록 필수 추가! */
+  box-sizing: border-box; 
 `;
 
-// 상단 돌아가기 버튼 영역
+
 const TopNav = styled.div`
   width: 100%;
   display: flex;
@@ -50,7 +49,7 @@ const BackButton = styled.button`
   }
 `;
 
-// 메인 질문 카드 (핑크 테두리)
+
 const QuestionCard = styled.div`
   background: #fff8f5;
   border: 2px solid #ffd9de;
@@ -74,7 +73,7 @@ const MainTitle = styled.h2`
   font-weight: bold;
 `;
 
-// 장소 선택 버튼 그리드 (2열)
+
 const LocationGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -83,7 +82,7 @@ const LocationGrid = styled.div`
   max-width: 280px;
 `;
 
-// 💡 선택 상태(isActive)에 따라 스타일이 동적으로 바뀌도록 수정
+
 const LocationButton = styled.button`
   background: ${(props) => (props.isActive ? "#F27F8D" : "white")};
   color: ${(props) => (props.isActive ? "white" : "#444")};
@@ -124,7 +123,6 @@ const AddButton = styled.button`
   }
 `;
 
-// 하단 카메라/갤러리 선택 영역
 const BottomActionArea = styled.div`
   display: flex;
   gap: 15px;
@@ -138,7 +136,7 @@ const BottomActionArea = styled.div`
 
 const ActionCard = styled.button`
   flex: 1;
-  height: auto; /* 💡 auto% 오타 수정 */
+  height: auto; 
   background: white;
   border-radius: 20px;
   padding: 15px 15px;
@@ -166,7 +164,6 @@ const ActionIcon = styled.div`
   color: #ff8a8a;
 `;
 
-// --- 컴포넌트 시작 ---
 
 function ImageChoice() {
   const navigate = useNavigate();
@@ -175,16 +172,16 @@ function ImageChoice() {
 
   localStorage.setItem("userLocation", Location);
 
-  // 💡 2. 숨겨진 파일 입력창을 조종할 리모컨(Ref) 생성
+
   const fileInputRef = useRef(null);
 
-  // 💡 3. 파일이 선택되었을 때 실행될 함수
+
   const handleFileChange = async (e) => {
-    const file = e.target.files[0]; // 선택된 첫 번째 파일 가져오기
+    const file = e.target.files[0]; 
 
     const imageUrl = URL.createObjectURL(file);
 
-    if (!file) return; // 파일이 선택되지 않았으면 함수 종료
+    if (!file) return; 
 
     localStorage.setItem("userLocation", selectedLocation);
 
@@ -196,7 +193,7 @@ function ImageChoice() {
 
     formData.append("childGender", localStorage.getItem("userGender"));
 
-    formData.append("image", file); // 'image'라는 키로 파일 추가
+    formData.append("image", file); 
 
     try {
       const response = await axios.post(
@@ -257,10 +254,10 @@ function ImageChoice() {
         </QuestionCard>
         <input
           type="file"
-          accept="image/*" // 이미지만 선택 가능하게 필터링
-          style={{ display: "none" }} // 화면에서 숨김
-          ref={fileInputRef} // 리모컨 연결
-          onChange={handleFileChange} // 파일 선택 시 함수 실행
+          accept="image/*" 
+          style={{ display: "none" }}
+          ref={fileInputRef} 
+          onChange={handleFileChange} 
         />
 
         {/* 하단 버튼 2개 */}

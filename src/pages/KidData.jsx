@@ -7,18 +7,18 @@ import "react-datepicker/dist/react-datepicker.css";
 import React from "react";
 
 
-// 화면 전체를 덮는 배경 컨테이너
+
 const BackGround = styled.div`
   display: flex;
-  justify-content: flex-start; // 콘텐츠가 길어질 때 위쪽이 잘리지 않도록 수정
+  justify-content: flex-start; 
   align-items: center;
   flex-direction: column;
-  height: 100dvh;          /* 화면 전체 높이를 모바일 뷰포트에 딱 맞춤 */
-  overflow-y: auto;        /* 내용이 넘치면 이 안에서만 스크롤이 생김 */
+  height: 100dvh;          
+  overflow-y: auto;      
   width: 100vw;
-  background-color: #FFF8F3; // 모바일 앱 밖의 배경색 (확인용)
+  background-color: #FFF8F3; 
   box-sizing: border-box;
-  padding: 40px 0 0px 0;   /* 하단 확인 버튼 아래 여유 공간 확보 */
+  padding: 40px 0 0px 0;  
 `;
 const Box = styled.div`
   width: 90%;
@@ -47,7 +47,7 @@ const BirthBox = styled.div`
   margin-top: 20px;
   padding: 0px 20px 20px 20px;
 `;
-const StyledInput = styled.input` //입력창 스타일
+const StyledInput = styled.input` 
   width: 100%;
   height: 48px;
   border-radius: 12px;
@@ -68,7 +68,7 @@ const StyledInput = styled.input` //입력창 스타일
     color: #C0B7B5;
   }
 `;
-const StyledDate = styled.div` //입력창 스타일
+const StyledDate = styled.div`
   width: 100%;
   height: 48px;
   border-radius: 12px;
@@ -90,7 +90,7 @@ background-color: white;
   }
 `;
 
-const PinkCircle = styled.div` //순서 번호 들어가는 스타일
+const PinkCircle = styled.div`
   border-radius: 50%;
   background-color: #FFF0F0;
   color: #f27f8d;
@@ -105,13 +105,13 @@ const PinkCircle = styled.div` //순서 번호 들어가는 스타일
 `;
 
 const GenderButton = ({ gend, gender, setGender }) => {
-    const isActive = gender === gend; // 현재 버튼이 선택되었는지 여부
+    const isActive = gender === gend; 
 
     return (
         <button
             onClick={() => setGender(gend)}
             style={{
-                //  가로 공간을 반씩 나눠 갖도록 flex 설정
+                
                 flex: 1, 
                 height: "33px",
                 borderRadius: "12px",
@@ -136,10 +136,10 @@ const DatePickerContainer = styled.div`
   width: 100%;
   
   .react-datepicker-wrapper {
-    width: 100%; /* 라이브러리 내부 wrapper 폭을 100%로 강제 확장 */
+    width: 100%; 
   }
 `;
-// 💡 내부 글자 중앙 정렬 버전 CustomInput
+
 const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
     <div 
         onClick={onClick}
@@ -147,7 +147,7 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
         style={{ 
             display: "flex", 
             alignItems: "center",
-            justifyContent: "center", // 💡 글자를 정중앙에 배치
+            justifyContent: "center",
             border: "2px solid #EFE1DB",
             borderRadius: "12px", 
             height: "48px", 
@@ -155,7 +155,7 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
             width: "100%", 
             boxSizing: "border-box",
             cursor: "pointer",
-            position: "relative" // 💡 우측 아이콘 고정을 위해 relative 추가
+            position: "relative"
         }}>
         
         {/* 날짜 텍스트 (부모가 중앙 정렬이라 딱 가운데에 옴) */}
@@ -201,21 +201,21 @@ const StepperContainer = styled.div`
 
 const ProgressLine = styled.div`
   position: absolute;
-  top: 10px; /* 동그라미 반지름 축에 맞춤 */
-  left: 55px; /*  첫 번째 아이템 너비(110px)의 절반인 55px부터 시작 */
-  width: calc(100% - 110px); /* 양쪽 끝 여백(55px * 2)을 제외한 만큼만 선 길이 설정 */
+  top: 10px; 
+  left: 55px; 
+  width: calc(100% - 110px);
   height: 3px;
-  background: #E0E0E0; /* 기본 비활성화 회색 선 */
+  background: #E0E0E0; 
   z-index: 1;
 `;
 
 const ActiveProgressLine = styled.div`
   position: absolute;
   top: 10px;
-  left: 55px; /*  회색 선과 똑같이 55px 지점부터 시작 */
-  width: calc(100% - 110px); /*  현재 2단계가 활성화이므로 두 번째 동그라미 중심까지 꽉 채움 */
+  left: 55px; 
+  width: calc(100% - 110px); 
   height: 3px;
-  background: #f27f8d; /* 활성화 핑크 선 */
+  background: #f27f8d; 
   z-index: 1;
 `;
 const StepItem = styled.div`
@@ -224,7 +224,7 @@ const StepItem = styled.div`
   align-items: center;
   position: relative;
   z-index: 2;
-  width: 110px; /* 텍스트가 정렬을 깨트리지 않도록 고정 폭 확보 */
+  width: 110px; 
 `;
 
 const StepCircle = styled.div`
@@ -244,7 +244,7 @@ const StepLabel = styled.span`
   white-space: nowrap;
 `;
 
-// 💡 [수정] 하단 최종 확인 버튼 피그마화
+
 const StyledConfirmButton = styled.button`
   width: 90%;
   max-width: 360px;
@@ -266,7 +266,7 @@ const StyledConfirmButton = styled.button`
 `;
 
 
-// 💡 성별 버튼을 가로로 이쁘게 배치하기 위한 묶음 박스
+
 const ButtonRow = styled.div`
   display: flex;
   gap: 12px;
@@ -281,18 +281,18 @@ const ButtonRow_2 = styled.div`
   justify-content:center;
 `;
 
-// 텍스트 관련
+
 const HeaderTitle = styled.h1`
   font-size: 1.6rem;
   margin-bottom: 5px;
   span { color: #f27f8d; }
 `;
 const Text = styled.div`
-  font-size: 1rem; // html 비례 폰트 조정
-  line-height: 1.3; // 줄간격
+  font-size: 1rem;
+  line-height: 1.3;
   margin-top: 20px;
   margin-bottom: 10px;
-  word-break: keep-all; // 무조건 단어 단위로 줄바꿈
+  word-break: keep-all; 
 `;
 const MiddleHeaderTitle = styled.h3`
   font-size: 1rem;
@@ -345,7 +345,7 @@ export default function KidData() {
     return (
 
         <BackGround>
-            {/* 💡 기존 이미지 구역을 코드로 완성한 대칭 스텝 바로 교체 */}
+            
             <StepperContainer>
                 <ProgressLine />
                 <ActiveProgressLine />
