@@ -278,7 +278,7 @@ const Smalltext = styled.div`
 export default function KidData() {
     const navigate = useNavigate();
     const [gender, setGender] = useState("");
-    const [name, setName] = useState("");
+    const [, setName] = useState("");
     const [height, setHeight] = useState("");
     const [date, setDate] = useState(null);
 
