@@ -171,7 +171,6 @@ function ImageChoice() {
   const locations = ["거실", "부엌", "화장실", "방", "베란다", "현관"];
 
 
-
   const fileInputRef = useRef(null);
 
 
@@ -196,7 +195,7 @@ function ImageChoice() {
 
     try {
       const response = await axios.post(
-        "http://13.209.34.14:8080/api/analysis",
+        "https://api.safetit.site/api/analysis",
         formData
       );
 
