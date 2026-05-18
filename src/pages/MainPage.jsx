@@ -8,9 +8,9 @@ const Box = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  min-height: 90vh; 
-  max-height: 90vh;
-  width: 100vw;
+  min-height: 100vh; 
+
+  width: 100%;
   background-color: #fff8f3; 
 `;
 
@@ -121,14 +121,20 @@ const TipCard = styled.div`
 const BottomNav = styled.nav`
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 100%; 
+
+  
   height: 70px;
   background: white;
   display: flex;
   justify-content: space-around;
   align-items: center;
   border-top: 1px solid #eee;
-  border-radius: 20px 20px 0 0;
+  padding: 0 -20px;
+  border-radius: 20px;
+
+  /* 요소의 크기에 패딩과 테두리를 포함시켜서 넘침을 방지합니다 */
+  box-sizing: border-box; 
 `;
 
 const NavItem = styled.div`
@@ -162,6 +168,7 @@ function MainPage({ name }) {
   const navigate = useNavigate();
 
   return (
+    <>
     <Box>
       <AppContainer>
         {/* 상단 헤더 영역 */}
@@ -233,7 +240,7 @@ function MainPage({ name }) {
             체크리스트
           </NavItem>
           <CameraIcon onClick={() => navigate("/ImageChoice")}>
-            <img src="./camera_icon.png" alt="" />
+            <img src="./Camera_icon.png" alt="" />
           </CameraIcon>
           <NavItem>
             🛡️
@@ -248,6 +255,7 @@ function MainPage({ name }) {
         </BottomNav>
       </AppContainer>
     </Box>
+    </>
   );
 }
 
