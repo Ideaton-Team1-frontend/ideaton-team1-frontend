@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import axios from "axios";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -192,7 +191,7 @@ const ModalContent = ({
       </CloseButton>
 
       <span style={{ display: "flex", marginBottom: "10px" }}>
-        <MImage src="speakerpt.png" />
+        <MImage src="speakerpt.png" alt="" />
 
         <div
           style={{
@@ -221,12 +220,12 @@ const ModalContent = ({
 
       <Bold>해결 방법</Bold>
       {solutions?.map((s, i) => (
-        <p key={i}>✅{s}</p>
+        <p key={i}><span style={{ marginRight: "3px"}}>✅</span>{s}</p>
       ))}
 
       <Bold>추천 물품</Bold>
       {recommendedItems?.map((item, i) => (
-        <p key={i}>💗{item}</p>
+        <p key={i}><span  style={{ marginRight: "3px"}}>💗</span>{item}</p>
       ))}
 
       <div
@@ -279,7 +278,7 @@ const ListItem = ({
       {isDone === null ? (
         // 아직 선택 안 했을 때
         <>
-          <MImage src="speakerpt.png" />
+          <MImage src="speakerpt.png" alt="" />
 
           <div
             style={{
@@ -322,7 +321,7 @@ const ListItem = ({
           }}
         >
           <MinickBox>
-            <img src="Checkcircle.png "></img>
+            <img src="Checkcircle.png" alt=""/>
           </MinickBox>{" "}
           해결 완료했어요!
         </p>
@@ -340,7 +339,7 @@ const ListItem = ({
           }}
         >
           <MinickBox>
-            <img src="Checkcircle1.png " />
+            <img src="Checkcircle1.png " alt="" />
           </MinickBox>
           체크리스트로 이동
         </p>
@@ -362,7 +361,6 @@ const ListItem = ({
 };
 
 export default function ResultPage() {
-  const [selectedItem, setSelectedItem] = useState(null); // 선택된 아이템
   const navigate = useNavigate();
 
   const analysisResult = JSON.parse(localStorage.getItem("analysisResult"));
@@ -448,7 +446,7 @@ export default function ResultPage() {
           }}
         >
           <PinkCircle>
-            <img src="alert.png" />
+            <img src="alert.png" alt="" />
           </PinkCircle>
           <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
             <span style={{ fontWeight: "bold", fontSize: "15px" }}>

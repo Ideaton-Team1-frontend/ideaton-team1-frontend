@@ -169,8 +169,7 @@ function ImageChoice() {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("거실");
   const locations = ["거실", "부엌", "화장실", "방", "베란다", "현관"];
-
-  localStorage.setItem("userLocation", Location);
+  
 
 
   const fileInputRef = useRef(null);
@@ -179,9 +178,15 @@ function ImageChoice() {
   const handleFileChange = async (e) => {
     const file = e.target.files[0]; 
 
-    const imageUrl = URL.createObjectURL(file);
+   
 
     if (!file) return; 
+
+    const imageUrl = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+    });
 
     localStorage.setItem("userLocation", selectedLocation);
 
@@ -197,7 +202,7 @@ function ImageChoice() {
 
     try {
       const response = await axios.post(
-        "http://13.209.34.14:8080/api/analysis",
+        "https://api.safetit.site/api/analysis",
         formData
       );
 

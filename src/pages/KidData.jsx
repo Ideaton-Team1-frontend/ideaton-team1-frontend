@@ -67,27 +67,7 @@ const StyledInput = styled.input`
     color: #C0B7B5;
   }
 `;
-const StyledDate = styled.div`
-  width: 100%;
-  height: 48px;
-  border-radius: 12px;
-  border: 1px solid #EBE4E2;
-background-color: white;
-  padding: 0 16px;
-  font-size: 0.95rem;
-  color: #4c3f3c;
-  box-sizing: border-box;
-  outline: none;
-  transition: all 0.2s;
-  
-  &:focus {
-    border-color: #f27f8d;
-    background-color: #fff;
-  }
-  &::placeholder {
-    color: #C0B7B5;
-  }
-`;
+
 
 const PinkCircle = styled.div`
   border-radius: 50%;
@@ -174,19 +154,9 @@ const CustomInput = React.forwardRef(({ value, onClick }, ref) => (
         </div>
     </div>
 ));
-const Btn = ({name , OnClick }) => {
-    return (
-        <button onClick={OnClick}>
-            {name}
-        </button>
-    );
-};
 
-const Process_img = styled.div`
-  display: flex;
- justify-content: center;
- padding: 30px;
-`;
+
+
 
 const StepperContainer = styled.div`
   display: flex;
@@ -272,7 +242,7 @@ const ButtonRow = styled.div`
   width: 100%;
   margin-top: 8px;
 `;
-const ButtonRow_2 = styled.div`
+const ButtonRow2 = styled.div`
   display: flex;
   width: 80%;
   margin-top: 8px;
@@ -308,7 +278,7 @@ const Smalltext = styled.div`
 export default function KidData() {
     const navigate = useNavigate();
     const [gender, setGender] = useState("");
-    const [name, setName] = useState("");
+    const [, setName] = useState("");
     const [height, setHeight] = useState("");
     const [date, setDate] = useState(null);
 
@@ -385,7 +355,7 @@ export default function KidData() {
                     < PinkCircle>2</PinkCircle> 아이의 <span style={{ color: "#f27f8d" }}>연령(월령)</span>을 선택해 주세요.
                 </MiddleHeaderTitle>
                 <Smalltext>생년 월일</Smalltext>
-                <DatePickerContainer><ButtonRow style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "8px",alignItems:"center"}}>
+                <DatePickerContainer><ButtonRow style={{ display: "flex", flexDirection: "row",  gap: "8px",alignItems:"center"}}>
                 <DatePicker
                   selected={date}
                   onChange={(date) => setDate(date)}
@@ -410,7 +380,7 @@ export default function KidData() {
                    onChange={(e) => setHeight(e.target.value)}
                 />
             </BirthBox>
-           <ButtonRow_2><StyledConfirmButton  onClick={() => goPhotoPage()}>확인</StyledConfirmButton></ButtonRow_2>
+           <ButtonRow2><StyledConfirmButton  onClick={() => goPhotoPage()}>확인</StyledConfirmButton></ButtonRow2>
 
          </BackGround>
         
