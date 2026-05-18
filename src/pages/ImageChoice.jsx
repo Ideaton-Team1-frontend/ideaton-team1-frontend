@@ -177,9 +177,15 @@ function ImageChoice() {
   const handleFileChange = async (e) => {
     const file = e.target.files[0]; 
 
-    const imageUrl = URL.createObjectURL(file);
+   
 
     if (!file) return; 
+
+    const imageUrl = await new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.readAsDataURL(file);
+    });
 
     localStorage.setItem("userLocation", selectedLocation);
 
