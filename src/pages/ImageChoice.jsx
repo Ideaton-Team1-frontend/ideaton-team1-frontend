@@ -169,6 +169,7 @@ function ImageChoice() {
   const navigate = useNavigate();
   const [selectedLocation, setSelectedLocation] = useState("거실");
   const locations = ["거실", "부엌", "화장실", "방", "베란다", "현관"];
+  
 
 
   const fileInputRef = useRef(null);

@@ -220,12 +220,12 @@ const ModalContent = ({
 
       <Bold>해결 방법</Bold>
       {solutions?.map((s, i) => (
-        <p key={i}>✅{s}</p>
+        <p key={i}><span style={{ marginRight: "3px"}}>✅</span>{s}</p>
       ))}
 
       <Bold>추천 물품</Bold>
       {recommendedItems?.map((item, i) => (
-        <p key={i}>💗{item}</p>
+        <p key={i}><span  style={{ marginRight: "3px"}}>💗</span>{item}</p>
       ))}
 
       <div
